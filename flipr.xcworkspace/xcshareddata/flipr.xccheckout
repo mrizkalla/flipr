@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>42635DF8-4DC0-4135-9E0D-736C32798335</string>
+	<key>IDESourceControlProjectName</key>
+	<string>flipr</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4DC7513D-A01F-4A8C-8C92-64AEEBB18778</key>
+		<string>ssh://github.com/mrizkalla/flipr.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>flipr.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4DC7513D-A01F-4A8C-8C92-64AEEBB18778</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/mrizkalla/flipr.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4DC7513D-A01F-4A8C-8C92-64AEEBB18778</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4DC7513D-A01F-4A8C-8C92-64AEEBB18778</string>
+			<key>IDESourceControlWCCName</key>
+			<string>flipr</string>
+		</dict>
+	</array>
+</dict>
+</plist>
