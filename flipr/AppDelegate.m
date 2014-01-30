@@ -7,12 +7,21 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [Parse setApplicationId:@"mztyxvPOS0v0qP6bslsRnAZMiM4WcCwCpwNOszU8"
+                  clientKey:@"4jRkxwJCfG9GdGWArOu8GS9QdoknQBfCjLbKRnh8"];
+    
+    [PFTwitterUtils initializeWithConsumerKey:@"U5IXd4U7LsuyTcSkiecuSw"
+                               consumerSecret:@"TQNYZskYkd7uLUqHp2SdHtU6tT8tRQ4HKjKNHGkQE"];
+    
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     return YES;
 }
 							

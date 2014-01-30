@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		11F3603F342F42D5ADEC7FAB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C95DB1112134393978A29DE /* libPods.a */; };
+		9FD1D7851899B7810076CC94 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7841899B7810076CC94 /* Parse.framework */; };
+		9FD1D7871899B7C20076CC94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */; };
+		9FD1D7891899B7D00076CC94 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7881899B7D00076CC94 /* CFNetwork.framework */; };
+		9FD1D78B1899B7EF0076CC94 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D78A1899B7EF0076CC94 /* CoreLocation.framework */; };
+		9FD1D78D1899B7FF0076CC94 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D78C1899B7FF0076CC94 /* libz.dylib */; };
+		9FD1D78F1899B80C0076CC94 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D78E1899B80C0076CC94 /* MobileCoreServices.framework */; };
+		9FD1D7911899B81B0076CC94 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7901899B81B0076CC94 /* QuartzCore.framework */; };
+		9FD1D7931899B8240076CC94 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7921899B8240076CC94 /* Security.framework */; };
+		9FD1D7951899B8310076CC94 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7941899B8310076CC94 /* StoreKit.framework */; };
+		9FD1D7971899B83E0076CC94 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */; };
+		9FD1D7991899BA170076CC94 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7981899BA170076CC94 /* FacebookSDK.framework */; };
 		A52610301891B26A00C87CB2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A526102F1891B26A00C87CB2 /* LoginViewController.m */; };
 		A52610331891B2A000C87CB2 /* VideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52610321891B2A000C87CB2 /* VideoTableViewController.m */; };
 		A52610361891B84A00C87CB2 /* CreateVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52610351891B84A00C87CB2 /* CreateVideoViewController.m */; };
@@ -40,6 +51,17 @@
 /* Begin PBXFileReference section */
 		1C95DB1112134393978A29DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		812BDD3AD3CF4598BC5E0BC1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		9FD1D7841899B7810076CC94 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9FD1D7881899B7D00076CC94 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9FD1D78A1899B7EF0076CC94 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9FD1D78C1899B7FF0076CC94 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		9FD1D78E1899B80C0076CC94 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		9FD1D7901899B81B0076CC94 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9FD1D7921899B8240076CC94 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9FD1D7941899B8310076CC94 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9FD1D7981899BA170076CC94 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		A526102E1891B26A00C87CB2 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		A526102F1891B26A00C87CB2 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A52610311891B2A000C87CB2 /* VideoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewController.h; sourceTree = "<group>"; };
@@ -72,10 +94,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD1D7971899B83E0076CC94 /* SystemConfiguration.framework in Frameworks */,
+				9FD1D7951899B8310076CC94 /* StoreKit.framework in Frameworks */,
+				9FD1D7931899B8240076CC94 /* Security.framework in Frameworks */,
+				9FD1D7911899B81B0076CC94 /* QuartzCore.framework in Frameworks */,
+				9FD1D78F1899B80C0076CC94 /* MobileCoreServices.framework in Frameworks */,
+				9FD1D78D1899B7FF0076CC94 /* libz.dylib in Frameworks */,
+				9FD1D78B1899B7EF0076CC94 /* CoreLocation.framework in Frameworks */,
 				A591FAA51889C9800096EBE9 /* CoreGraphics.framework in Frameworks */,
+				9FD1D7891899B7D00076CC94 /* CFNetwork.framework in Frameworks */,
+				9FD1D7871899B7C20076CC94 /* AudioToolbox.framework in Frameworks */,
 				A591FAA71889C9800096EBE9 /* UIKit.framework in Frameworks */,
+				9FD1D7991899BA170076CC94 /* FacebookSDK.framework in Frameworks */,
 				A591FAA31889C9800096EBE9 /* Foundation.framework in Frameworks */,
 				11F3603F342F42D5ADEC7FAB /* libPods.a in Frameworks */,
+				9FD1D7851899B7810076CC94 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +148,17 @@
 		A591FAA11889C9800096EBE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9FD1D7981899BA170076CC94 /* FacebookSDK.framework */,
+				9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */,
+				9FD1D7941899B8310076CC94 /* StoreKit.framework */,
+				9FD1D7921899B8240076CC94 /* Security.framework */,
+				9FD1D7901899B81B0076CC94 /* QuartzCore.framework */,
+				9FD1D78E1899B80C0076CC94 /* MobileCoreServices.framework */,
+				9FD1D78C1899B7FF0076CC94 /* libz.dylib */,
+				9FD1D78A1899B7EF0076CC94 /* CoreLocation.framework */,
+				9FD1D7881899B7D00076CC94 /* CFNetwork.framework */,
+				9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */,
+				9FD1D7841899B7810076CC94 /* Parse.framework */,
 				A591FAA21889C9800096EBE9 /* Foundation.framework */,
 				A591FAA41889C9800096EBE9 /* CoreGraphics.framework */,
 				A591FAA61889C9800096EBE9 /* UIKit.framework */,
@@ -438,6 +482,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/andyrhee/Desktop/flipr,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "flipr/flipr-Prefix.pch";
 				INFOPLIST_FILE = "flipr/flipr-Info.plist";
@@ -452,6 +500,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/andyrhee/Desktop/flipr,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "flipr/flipr-Prefix.pch";
 				INFOPLIST_FILE = "flipr/flipr-Info.plist";
