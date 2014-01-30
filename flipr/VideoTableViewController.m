@@ -8,6 +8,8 @@
 
 #import "VideoTableViewController.h"
 
+NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
+
 @interface VideoTableViewController ()
 
 @end
@@ -32,6 +34,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,5 +120,18 @@
 }
 
  */
+
+
+#pragma mark - Private methods
+
+- (void)onSignOutButton {
+    NSLog(@"Signing out...");
+    [PFUser logOut];
+    
+    // Send the log out notification to go back to log in screen
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
+
+}
+
 
 @end

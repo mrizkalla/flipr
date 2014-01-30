@@ -4,28 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller - Login-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="LoginViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ocm-kQ-4Yc"/>
-                        <viewControllerLayoutGuide type="bottom" id="qUX-hu-UOX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Login" id="6Mg-xH-xiy"/>
-                    <connections>
-                        <segue destination="AfQ-FN-28K" kind="push" id="sza-5d-fpT"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-211" y="-246"/>
-        </scene>
         <!--Select Photos View Controller-->
         <scene sceneID="7Ps-Yn-8QC">
             <objects>
@@ -41,7 +19,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QhY-8W-tbE">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -55,10 +33,11 @@
                             <outlet property="delegate" destination="ht5-0b-bSA" id="M89-bD-oD3"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="k6d-NS-xVg"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iaq-tF-Cxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="767" y="-246"/>
+            <point key="canvasLocation" x="169" y="-246"/>
         </scene>
         <!--Create Video View Controller-->
         <scene sceneID="Uye-Ct-vDk">
@@ -102,10 +81,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="2A2-nC-8Ju"/>
+                    <connections>
+                        <segue destination="ht5-0b-bSA" kind="push" id="3ot-YC-zVY"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDd-V7-KC9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="291" y="-246"/>
+            <point key="canvasLocation" x="-277" y="-246"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a00-cO-NdS">
@@ -118,7 +100,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="pK1-nn-AiO"/>
+                        <segue destination="AfQ-FN-28K" kind="relationship" relationship="rootViewController" id="7xf-By-dE3"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xEn-LZ-iLY" userLabel="First Responder" sceneMemberID="firstResponder"/>

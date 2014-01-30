@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
     // Force logout when app loads - comment this out when we're ready for PFUser to persist
     //[PFUser logOut];
 }
@@ -127,13 +127,13 @@
 
 #pragma mark - Private methods
 
-- (void)onSignOutButton {
-    NSLog(@"Signing out...");
-    [PFUser logOut];
-    // This does not work somehow
-    // [self.navigationController popViewControllerAnimated:YES];
-    [self presentLogInScreen];
-}
+//- (void)onSignOutButton {
+//    NSLog(@"Signing out...");
+//    [PFUser logOut];
+//    // This does not work somehow
+//    // [self.navigationController popViewControllerAnimated:YES];
+//    [self presentLogInScreen];
+//}
 
 - (void)presentLogInScreen {
     // Create the log in view controller

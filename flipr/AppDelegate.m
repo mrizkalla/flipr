@@ -8,6 +8,18 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "LoginViewController.h"
+#import "VideoTableViewController.h"
+
+@interface AppDelegate ()
+
+- (void)updateRootVC;
+
+@property (nonatomic, strong) LoginViewController *loginVC;
+@property (nonatomic, strong) UINavigationController *videoNVC;
+@property (nonatomic, strong) UIViewController *currentVC;
+
+@end
 
 @implementation AppDelegate
 
@@ -21,6 +33,15 @@
                                consumerSecret:@"TQNYZskYkd7uLUqHp2SdHtU6tT8tRQ4HKjKNHGkQE"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.window.rootViewController = self.currentVC;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootVC) name:PFLogInSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootVC) name:UserDidLogoutNotification object:nil];
+    
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
@@ -50,6 +71,41 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Private methods
+
+- (UIViewController *)currentVC {
+    if ([PFUser currentUser]) {
+        NSLog(@"Current user exists...");
+        return self.videoNVC;
+    } else {
+        NSLog(@"No current user, fire up a log in view...");
+        return self.loginVC;
+    }
+}
+
+- (UINavigationController *)videoNVC {
+    if (!_videoNVC) {
+        VideoTableViewController *videoTableVC = [[VideoTableViewController alloc] init];
+        _videoNVC = [[UINavigationController alloc] initWithRootViewController:videoTableVC];
+    }
+    
+    return _videoNVC;
+}
+
+- (LoginViewController *)loginVC {
+    if (!_loginVC) {
+        NSLog(@"Allocating loginVC...");
+        _loginVC = [[LoginViewController alloc] init];
+        NSLog(@"Allocated! %@", _loginVC);
+    }
+    
+    return _loginVC;
+}
+
+- (void)updateRootVC {
+    self.window.rootViewController = self.currentVC;
 }
 
 @end

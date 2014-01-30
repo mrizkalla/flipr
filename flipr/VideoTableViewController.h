@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface VideoTableViewController : UITableViewController
+extern NSString *const UserDidLogoutNotification;
+
+@interface VideoTableViewController : UITableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @end
