@@ -33,7 +33,17 @@
                             <outlet property="delegate" destination="ht5-0b-bSA" id="M89-bD-oD3"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="k6d-NS-xVg"/>
+                    <navigationItem key="navigationItem" id="k6d-NS-xVg">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="pcg-s3-C7l">
+                            <rect key="frame" x="50" y="7" width="220" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Camera Roll"/>
+                                <segment title="Flickr"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iaq-tF-Cxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -82,7 +92,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="2A2-nC-8Ju"/>
                     <connections>
-                        <segue destination="ht5-0b-bSA" kind="push" id="3ot-YC-zVY"/>
+                        <segue destination="ht5-0b-bSA" kind="push" identifier="createVCSegue" id="TK9-bj-iWh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDd-V7-KC9" userLabel="First Responder" sceneMemberID="firstResponder"/>

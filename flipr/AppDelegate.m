@@ -87,8 +87,14 @@
 
 - (UINavigationController *)videoNVC {
     if (!_videoNVC) {
-        VideoTableViewController *videoTableVC = [[VideoTableViewController alloc] init];
-        _videoNVC = [[UINavigationController alloc] initWithRootViewController:videoTableVC];
+        
+        //We want to initialize the storyboard here and not the VideoViewController.Please 
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+       _videoNVC =[storyboard instantiateInitialViewController];
+        
+       
+        //VideoTableViewController *videoTableVC = [[VideoTableViewController alloc] init];
+        //_videoNVC = [[UINavigationController alloc] initWithRootViewController:videoTableVC];
     }
     
     return _videoNVC;

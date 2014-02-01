@@ -36,6 +36,8 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddNewButton)];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,6 +133,14 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
     // Send the log out notification to go back to log in screen
     [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
 
+}
+
+#pragma - Segue methods
+
+- (void)onAddNewButton {
+    
+    [self performSegueWithIdentifier:@"createVCSegue" sender:self];
+    
 }
 
 
