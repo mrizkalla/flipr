@@ -77,6 +77,13 @@
 // Sent to the delegate when the log in attempt fails.
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
     NSLog(@"Failed to log in...");
+
+    [[[UIAlertView alloc] initWithTitle:@"Login Failure"
+                                message:@"Make sure you input correct information!"
+                               delegate:nil
+                      cancelButtonTitle:@"ok"
+                      otherButtonTitles:nil] show];
+
 }
 
 // Sent to the delegate when the log in screen is dismissed.
@@ -139,7 +146,12 @@
     // Create the log in view controller
     PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
     [logInViewController setDelegate:self]; // Set ourselves as the delegate
-    logInViewController.fields = PFLogInFieldsDefault | PFLogInFieldsFacebook | PFLogInFieldsTwitter;
+    
+    /* ###Facebook###
+    // logInViewController.fields = PFLogInFieldsDefault | PFLogInFieldsFacebook | PFLogInFieldsTwitter;
+    */
+    logInViewController.fields = PFLogInFieldsDefault | PFLogInFieldsTwitter;
+
 
     // Create the sign up view controller
     PFSignUpViewController *signUpViewController = [[PFSignUpViewController alloc] init];
