@@ -23,6 +23,11 @@
 		9FD1D7951899B8310076CC94 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7941899B8310076CC94 /* StoreKit.framework */; };
 		9FD1D7971899B83E0076CC94 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */; };
 		9FD1D7991899BA170076CC94 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7981899BA170076CC94 /* FacebookSDK.framework */; };
+		A5080907189ED32B009561FD /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5080906189ED32B009561FD /* VideoCell.m */; };
+		A516FC4E189B0A3600164E5A /* IMG_0315.MOV in Resources */ = {isa = PBXBuildFile; fileRef = A516FC4D189B0A3600164E5A /* IMG_0315.MOV */; };
+		A516FC50189B322100164E5A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516FC4F189B322100164E5A /* MediaPlayer.framework */; };
+		A516FC57189C157000164E5A /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516FC55189C157000164E5A /* AWSRuntime.framework */; };
+		A516FC58189C157000164E5A /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516FC56189C157000164E5A /* AWSS3.framework */; };
 		A52610301891B26A00C87CB2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A526102F1891B26A00C87CB2 /* LoginViewController.m */; };
 		A52610331891B2A000C87CB2 /* VideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52610321891B2A000C87CB2 /* VideoTableViewController.m */; };
 		A52610361891B84A00C87CB2 /* CreateVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52610351891B84A00C87CB2 /* CreateVideoViewController.m */; };
@@ -75,6 +80,12 @@
 		9FD1D7941899B8310076CC94 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9FD1D7981899BA170076CC94 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		A5080905189ED32B009561FD /* VideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
+		A5080906189ED32B009561FD /* VideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
+		A516FC4D189B0A3600164E5A /* IMG_0315.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0315.MOV; sourceTree = "<group>"; };
+		A516FC4F189B322100164E5A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		A516FC55189C157000164E5A /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "aws-ios-sdk-1.7.1/AWSRuntime.framework"; sourceTree = "<group>"; };
+		A516FC56189C157000164E5A /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "aws-ios-sdk-1.7.1/AWSS3.framework"; sourceTree = "<group>"; };
 		A526102E1891B26A00C87CB2 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		A526102F1891B26A00C87CB2 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A52610311891B2A000C87CB2 /* VideoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewController.h; sourceTree = "<group>"; };
@@ -107,6 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A516FC57189C157000164E5A /* AWSRuntime.framework in Frameworks */,
+				A516FC58189C157000164E5A /* AWSS3.framework in Frameworks */,
+				A516FC50189B322100164E5A /* MediaPlayer.framework in Frameworks */,
 				9FD1D7971899B83E0076CC94 /* SystemConfiguration.framework in Frameworks */,
 				9FD1D7951899B8310076CC94 /* StoreKit.framework in Frameworks */,
 				9FD1D7931899B8240076CC94 /* Security.framework in Frameworks */,
@@ -184,6 +198,9 @@
 		A591FAA11889C9800096EBE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A516FC55189C157000164E5A /* AWSRuntime.framework */,
+				A516FC56189C157000164E5A /* AWSS3.framework */,
+				A516FC4F189B322100164E5A /* MediaPlayer.framework */,
 				9FD1D7981899BA170076CC94 /* FacebookSDK.framework */,
 				9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */,
 				9FD1D7941899B8310076CC94 /* StoreKit.framework */,
@@ -222,6 +239,8 @@
 				A526102F1891B26A00C87CB2 /* LoginViewController.m */,
 				A591FABA1889C9800096EBE9 /* Images.xcassets */,
 				A591FAA91889C9800096EBE9 /* Supporting Files */,
+				A5080905189ED32B009561FD /* VideoCell.h */,
+				A5080906189ED32B009561FD /* VideoCell.m */,
 			);
 			path = flipr;
 			sourceTree = "<group>";
@@ -230,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				21BC854C189DBC360042A6CD /* FlickrCommons.h */,
+				A516FC4D189B0A3600164E5A /* IMG_0315.MOV */,
 				A591FAAA1889C9800096EBE9 /* flipr-Info.plist */,
 				A591FAAB1889C9800096EBE9 /* InfoPlist.strings */,
 				A591FAAE1889C9800096EBE9 /* main.m */,
@@ -335,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A591FABB1889C9800096EBE9 /* Images.xcassets in Resources */,
+				A516FC4E189B0A3600164E5A /* IMG_0315.MOV in Resources */,
 				A591FAAD1889C9800096EBE9 /* InfoPlist.strings in Resources */,
 				A591FAB61889C9800096EBE9 /* Main.storyboard in Resources */,
 			);
@@ -388,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5080907189ED32B009561FD /* VideoCell.m in Sources */,
 				A591FAB31889C9800096EBE9 /* AppDelegate.m in Sources */,
 				A52610391891B88D00C87CB2 /* SelectPhotosViewController.m in Sources */,
 				A591FAAF1889C9800096EBE9 /* main.m in Sources */,
@@ -525,7 +547,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"/Users/rizkalla/Downloads/aws-ios-sdk-1.7.1",
+					"/Users/rizkalla/workspace/flipr/aws-ios-sdk-1.7.1",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "flipr/flipr-Prefix.pch";
 				INFOPLIST_FILE = "flipr/flipr-Info.plist";

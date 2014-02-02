@@ -11,6 +11,6 @@
 
 extern NSString *const UserDidLogoutNotification;
 
-@interface VideoTableViewController : UITableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface VideoTableViewController : PFQueryTableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @end

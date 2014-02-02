@@ -7,6 +7,8 @@
 //
 
 #import "VideoTableViewController.h"
+#import "VideoCell.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 
@@ -16,11 +18,14 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 
 @implementation VideoTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Custom initialization
+        // This table displays items in the Todo class
+        self.parseClassName = @"UserVideo";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = NO;
+        self.objectsPerPage = 25;
     }
     return self;
 }
@@ -36,92 +41,51 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddNewButton)];
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddNewButton)];
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+- (PFQuery *)queryForTable {
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
-    // Configure the cell...
+    // If no objects are loaded in memory, we look to the cache
+    // first to fill the table and then subsequently do a query
+    // against the network.
+    if ([self.objects count] == 0) {
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    }
     
+    [query orderByDescending:@"createdAt"];
+    
+    return query;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+                        object:(PFObject *)object {
+    static NSString *CellIdentifier = @"VideoCell";
+    
+    VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    
+    // Configure the cell to show todo item with a priority at the bottom
+    cell.titleLabel.text = [object objectForKey:@"title"];
+    cell.durationLabel.text = [object objectForKey:@"duration"];
+
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    
+    PFObject *selectedObject = [self objectAtIndexPath:indexPath];
+    NSURL *theURL = [NSURL URLWithString:selectedObject[@"videoUrl"]];
+    
+    MPMoviePlayerViewController *movieVC = [[MPMoviePlayerViewController alloc] initWithContentURL:theURL];
+    [self presentMoviePlayerViewControllerAnimated:movieVC];
 }
 
- */
+
 
 
 #pragma mark - Private methods
@@ -136,12 +100,13 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 }
 
 #pragma - Segue methods
-
+/*
 - (void)onAddNewButton {
     
     [self performSegueWithIdentifier:@"createVCSegue" sender:self];
     
 }
+ */
 
 
 @end
