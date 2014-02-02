@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		11F3603F342F42D5ADEC7FAB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C95DB1112134393978A29DE /* libPods.a */; };
+		21BC853E189DB8220042A6CD /* FlickrClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC853D189DB8220042A6CD /* FlickrClient.m */; };
+		21BC8541189DB8800042A6CD /* RestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC8540189DB8800042A6CD /* RestObject.m */; };
+		21BC8544189DB8980042A6CD /* FlickrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC8543189DB8980042A6CD /* FlickrUser.m */; };
+		21BC854B189DBB730042A6CD /* NSDictionary+CPAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */; };
 		9FD1D7851899B7810076CC94 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7841899B7810076CC94 /* Parse.framework */; };
 		9FD1D7871899B7C20076CC94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */; };
 		9FD1D7891899B7D00076CC94 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7881899B7D00076CC94 /* CFNetwork.framework */; };
@@ -50,6 +54,15 @@
 
 /* Begin PBXFileReference section */
 		1C95DB1112134393978A29DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		21BC853C189DB8220042A6CD /* FlickrClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrClient.h; sourceTree = "<group>"; };
+		21BC853D189DB8220042A6CD /* FlickrClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrClient.m; sourceTree = "<group>"; };
+		21BC853F189DB8800042A6CD /* RestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestObject.h; path = flipr/RestObject.h; sourceTree = "<group>"; };
+		21BC8540189DB8800042A6CD /* RestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RestObject.m; path = flipr/RestObject.m; sourceTree = "<group>"; };
+		21BC8542189DB8980042A6CD /* FlickrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrUser.h; sourceTree = "<group>"; };
+		21BC8543189DB8980042A6CD /* FlickrUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrUser.m; sourceTree = "<group>"; };
+		21BC8549189DBB730042A6CD /* NSDictionary+CPAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+CPAdditions.h"; path = "flipr/NSDictionary+CPAdditions.h"; sourceTree = "<group>"; };
+		21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+CPAdditions.m"; path = "flipr/NSDictionary+CPAdditions.m"; sourceTree = "<group>"; };
+		21BC854C189DBC360042A6CD /* FlickrCommons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrCommons.h; sourceTree = "<group>"; };
 		812BDD3AD3CF4598BC5E0BC1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		9FD1D7841899B7810076CC94 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -125,6 +138,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21BC8539189DB6920042A6CD /* FlickrSupport */ = {
+			isa = PBXGroup;
+			children = (
+				21BC853C189DB8220042A6CD /* FlickrClient.h */,
+				21BC853D189DB8220042A6CD /* FlickrClient.m */,
+				21BC8542189DB8980042A6CD /* FlickrUser.h */,
+				21BC8543189DB8980042A6CD /* FlickrUser.m */,
+			);
+			name = FlickrSupport;
+			sourceTree = "<group>";
+		};
+		21BC853A189DB6AE0042A6CD /* RestSupport */ = {
+			isa = PBXGroup;
+			children = (
+				21BC853F189DB8800042A6CD /* RestObject.h */,
+				21BC8540189DB8800042A6CD /* RestObject.m */,
+				21BC8549189DBB730042A6CD /* NSDictionary+CPAdditions.h */,
+				21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */,
+			);
+			name = RestSupport;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		A591FA961889C9800096EBE9 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +207,8 @@
 		A591FAA81889C9800096EBE9 /* flipr */ = {
 			isa = PBXGroup;
 			children = (
+				21BC853A189DB6AE0042A6CD /* RestSupport */,
+				21BC8539189DB6920042A6CD /* FlickrSupport */,
 				A591FAB11889C9800096EBE9 /* AppDelegate.h */,
 				A591FAB21889C9800096EBE9 /* AppDelegate.m */,
 				A591FAB41889C9800096EBE9 /* Main.storyboard */,
@@ -191,6 +229,7 @@
 		A591FAA91889C9800096EBE9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				21BC854C189DBC360042A6CD /* FlickrCommons.h */,
 				A591FAAA1889C9800096EBE9 /* flipr-Info.plist */,
 				A591FAAB1889C9800096EBE9 /* InfoPlist.strings */,
 				A591FAAE1889C9800096EBE9 /* main.m */,
@@ -352,8 +391,12 @@
 				A591FAB31889C9800096EBE9 /* AppDelegate.m in Sources */,
 				A52610391891B88D00C87CB2 /* SelectPhotosViewController.m in Sources */,
 				A591FAAF1889C9800096EBE9 /* main.m in Sources */,
+				21BC8544189DB8980042A6CD /* FlickrUser.m in Sources */,
 				A52610301891B26A00C87CB2 /* LoginViewController.m in Sources */,
+				21BC854B189DBB730042A6CD /* NSDictionary+CPAdditions.m in Sources */,
+				21BC8541189DB8800042A6CD /* RestObject.m in Sources */,
 				A52610331891B2A000C87CB2 /* VideoTableViewController.m in Sources */,
+				21BC853E189DB8220042A6CD /* FlickrClient.m in Sources */,
 				A52610361891B84A00C87CB2 /* CreateVideoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

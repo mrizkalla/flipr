@@ -42,8 +42,14 @@
                                 <segment title="Camera Roll"/>
                                 <segment title="Flickr"/>
                             </segments>
+                            <connections>
+                                <action selector="photoSourceValueChanged:" destination="ht5-0b-bSA" eventType="valueChanged" id="zpe-Gc-46g"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="photoSourceSegmentControl" destination="pcg-s3-C7l" id="Jpk-2C-Mdg"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iaq-tF-Cxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
