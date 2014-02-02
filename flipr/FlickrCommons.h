@@ -17,7 +17,7 @@
 // Models
 #import "RestObject.h"
 #import "FlickrUser.h"
-
+#import "FlickrPhoto.h"
 
 // Categories
 #import "NSDictionary+CPAdditions.h"

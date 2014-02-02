@@ -7,9 +7,16 @@
 //
 
 #import "SelectPhotosViewController.h"
+#import "FlickrCell.h"
+#import "FlickrPhoto.h"
+
 
 @interface SelectPhotosViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *photoSourceSegmentControl;
+
+@property (strong, nonatomic) IBOutlet UICollectionView *photosCollectionView;
+@property (nonatomic, strong) NSMutableArray *flickrImageResults;
+
 - (IBAction)photoSourceValueChanged:(id)sender;
 - (void) onSignIn;
 - (void)onError;
@@ -33,6 +40,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //Register custom cell nib
+    UINib *customNib = [UINib nibWithNibName:@"FlickrCell" bundle:nil];
+    [self.photosCollectionView registerNib:customNib forCellWithReuseIdentifier:@"FlickrCell"];
+    
+    self.photosCollectionView.dataSource=self;
+    self.photosCollectionView.delegate=self;
+    [self.photosCollectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +63,7 @@
     }else{
         NSLog(@"Selected Flickr");
         if([FlickrUser currentFlickrUser]){
-            [self onSignIn];
+            [self getUserPhotos];
             
         }else{
             
@@ -83,14 +98,66 @@
 - (void) getUserPhotos{
     [[FlickrClient instance] getFlickrPhotosWithCount:20  success:^(AFHTTPRequestOperation *operation, id response) {
 
-        id object = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
-        NSLog(@"User pics: %@", object);
-        // self.tweets = [Tweet tweetsWithArray:object];
-        //[self.tableView reloadData];
+        id results = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+        id photos = [[ results objectForKey:@"photos"] objectForKey:@"photo"];
+        NSLog(@"User pics: %@", photos);
+        self.flickrImageResults = [FlickrPhoto photosWithArray:photos];
+        [self.photosCollectionView reloadData];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // Do nothing
     }];
 
     
 }
+
+#pragma mark - UICollectionView methods
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+//Collection View method
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    return [self.flickrImageResults count];
+    
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString *CellIdentifier = @"FlickrCell";
+    
+    //Dequeue or create cell of appropriate type
+    FlickrCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+    FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
+
+    
+    cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
+
+    NSURL *fpURL =  [NSURL URLWithString:fp.photoURL];
+    NSData *fpData = [[NSData alloc] initWithContentsOfURL: fpURL];
+    UIImage *fpImage = [[UIImage alloc] initWithData:fpData];
+    
+    [cell.flickrPhotoImageView setImage:fpImage];
+    
+    return cell;
+    
+}
+
+
+#pragma mark -UICollectiovViewFlowLayout delegate
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CGSize retval;
+    retval = CGSizeMake(50, 50);
+    
+    return retval;
+    
+}
+
+
 @end
