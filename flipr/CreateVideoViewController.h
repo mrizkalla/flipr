@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AWSS3/AWSS3.h>
 
-@interface CreateVideoViewController : UIViewController
+@interface CreateVideoViewController : UIViewController <AmazonServiceRequestDelegate>
 
 @end

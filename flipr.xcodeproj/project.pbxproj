@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		11F3603F342F42D5ADEC7FAB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C95DB1112134393978A29DE /* libPods.a */; };
+		21BC853E189DB8220042A6CD /* FlickrClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC853D189DB8220042A6CD /* FlickrClient.m */; };
+		21BC8541189DB8800042A6CD /* RestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC8540189DB8800042A6CD /* RestObject.m */; };
+		21BC8544189DB8980042A6CD /* FlickrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC8543189DB8980042A6CD /* FlickrUser.m */; };
+		21BC854B189DBB730042A6CD /* NSDictionary+CPAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */; };
+		21C97641189F04FA0096620D /* FlickrCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C97640189F04FA0096620D /* FlickrCell.m */; };
+		21C97643189F051E0096620D /* FlickrCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C97642189F051E0096620D /* FlickrCell.xib */; };
+		21C97646189F06920096620D /* FlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C97645189F06920096620D /* FlickrPhoto.m */; };
 		9FD1D7851899B7810076CC94 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7841899B7810076CC94 /* Parse.framework */; };
 		9FD1D7871899B7C20076CC94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */; };
 		9FD1D7891899B7D00076CC94 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7881899B7D00076CC94 /* CFNetwork.framework */; };
@@ -19,6 +26,11 @@
 		9FD1D7951899B8310076CC94 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7941899B8310076CC94 /* StoreKit.framework */; };
 		9FD1D7971899B83E0076CC94 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */; };
 		9FD1D7991899BA170076CC94 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7981899BA170076CC94 /* FacebookSDK.framework */; };
+		A5080907189ED32B009561FD /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5080906189ED32B009561FD /* VideoCell.m */; };
+		A516FC4E189B0A3600164E5A /* IMG_0315.MOV in Resources */ = {isa = PBXBuildFile; fileRef = A516FC4D189B0A3600164E5A /* IMG_0315.MOV */; };
+		A516FC50189B322100164E5A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516FC4F189B322100164E5A /* MediaPlayer.framework */; };
+		A516FC57189C157000164E5A /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516FC55189C157000164E5A /* AWSRuntime.framework */; };
+		A516FC58189C157000164E5A /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A516FC56189C157000164E5A /* AWSS3.framework */; };
 		A52610301891B26A00C87CB2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A526102F1891B26A00C87CB2 /* LoginViewController.m */; };
 		A52610331891B2A000C87CB2 /* VideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52610321891B2A000C87CB2 /* VideoTableViewController.m */; };
 		A52610361891B84A00C87CB2 /* CreateVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A52610351891B84A00C87CB2 /* CreateVideoViewController.m */; };
@@ -50,6 +62,20 @@
 
 /* Begin PBXFileReference section */
 		1C95DB1112134393978A29DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		21BC853C189DB8220042A6CD /* FlickrClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrClient.h; sourceTree = "<group>"; };
+		21BC853D189DB8220042A6CD /* FlickrClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrClient.m; sourceTree = "<group>"; };
+		21BC853F189DB8800042A6CD /* RestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestObject.h; path = flipr/RestObject.h; sourceTree = "<group>"; };
+		21BC8540189DB8800042A6CD /* RestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RestObject.m; path = flipr/RestObject.m; sourceTree = "<group>"; };
+		21BC8542189DB8980042A6CD /* FlickrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrUser.h; sourceTree = "<group>"; };
+		21BC8543189DB8980042A6CD /* FlickrUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrUser.m; sourceTree = "<group>"; };
+		21BC8549189DBB730042A6CD /* NSDictionary+CPAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+CPAdditions.h"; path = "flipr/NSDictionary+CPAdditions.h"; sourceTree = "<group>"; };
+		21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+CPAdditions.m"; path = "flipr/NSDictionary+CPAdditions.m"; sourceTree = "<group>"; };
+		21BC854C189DBC360042A6CD /* FlickrCommons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrCommons.h; sourceTree = "<group>"; };
+		21C9763F189F04FA0096620D /* FlickrCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlickrCell.h; path = ../FlickrCell.h; sourceTree = "<group>"; };
+		21C97640189F04FA0096620D /* FlickrCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlickrCell.m; path = ../FlickrCell.m; sourceTree = "<group>"; };
+		21C97642189F051E0096620D /* FlickrCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FlickrCell.xib; path = ../FlickrCell.xib; sourceTree = "<group>"; };
+		21C97644189F06920096620D /* FlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhoto.h; sourceTree = "<group>"; };
+		21C97645189F06920096620D /* FlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhoto.m; sourceTree = "<group>"; };
 		812BDD3AD3CF4598BC5E0BC1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		9FD1D7841899B7810076CC94 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -62,6 +88,12 @@
 		9FD1D7941899B8310076CC94 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9FD1D7981899BA170076CC94 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		A5080905189ED32B009561FD /* VideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
+		A5080906189ED32B009561FD /* VideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
+		A516FC4D189B0A3600164E5A /* IMG_0315.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0315.MOV; sourceTree = "<group>"; };
+		A516FC4F189B322100164E5A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		A516FC55189C157000164E5A /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "aws-ios-sdk-1.7.1/AWSRuntime.framework"; sourceTree = "<group>"; };
+		A516FC56189C157000164E5A /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "aws-ios-sdk-1.7.1/AWSS3.framework"; sourceTree = "<group>"; };
 		A526102E1891B26A00C87CB2 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		A526102F1891B26A00C87CB2 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A52610311891B2A000C87CB2 /* VideoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewController.h; sourceTree = "<group>"; };
@@ -94,6 +126,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A516FC57189C157000164E5A /* AWSRuntime.framework in Frameworks */,
+				A516FC58189C157000164E5A /* AWSS3.framework in Frameworks */,
+				A516FC50189B322100164E5A /* MediaPlayer.framework in Frameworks */,
 				9FD1D7971899B83E0076CC94 /* SystemConfiguration.framework in Frameworks */,
 				9FD1D7951899B8310076CC94 /* StoreKit.framework in Frameworks */,
 				9FD1D7931899B8240076CC94 /* Security.framework in Frameworks */,
@@ -125,6 +160,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21BC8539189DB6920042A6CD /* FlickrSupport */ = {
+			isa = PBXGroup;
+			children = (
+				21BC853C189DB8220042A6CD /* FlickrClient.h */,
+				21C9763F189F04FA0096620D /* FlickrCell.h */,
+				21C97642189F051E0096620D /* FlickrCell.xib */,
+				21C97640189F04FA0096620D /* FlickrCell.m */,
+				21BC853D189DB8220042A6CD /* FlickrClient.m */,
+				21BC8542189DB8980042A6CD /* FlickrUser.h */,
+				21BC8543189DB8980042A6CD /* FlickrUser.m */,
+			);
+			name = FlickrSupport;
+			sourceTree = "<group>";
+		};
+		21BC853A189DB6AE0042A6CD /* RestSupport */ = {
+			isa = PBXGroup;
+			children = (
+				21BC853F189DB8800042A6CD /* RestObject.h */,
+				21C97644189F06920096620D /* FlickrPhoto.h */,
+				21C97645189F06920096620D /* FlickrPhoto.m */,
+				21BC8540189DB8800042A6CD /* RestObject.m */,
+				21BC8549189DBB730042A6CD /* NSDictionary+CPAdditions.h */,
+				21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */,
+			);
+			name = RestSupport;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		A591FA961889C9800096EBE9 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +211,9 @@
 		A591FAA11889C9800096EBE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A516FC55189C157000164E5A /* AWSRuntime.framework */,
+				A516FC56189C157000164E5A /* AWSS3.framework */,
+				A516FC4F189B322100164E5A /* MediaPlayer.framework */,
 				9FD1D7981899BA170076CC94 /* FacebookSDK.framework */,
 				9FD1D7961899B83E0076CC94 /* SystemConfiguration.framework */,
 				9FD1D7941899B8310076CC94 /* StoreKit.framework */,
@@ -171,6 +237,8 @@
 		A591FAA81889C9800096EBE9 /* flipr */ = {
 			isa = PBXGroup;
 			children = (
+				21BC853A189DB6AE0042A6CD /* RestSupport */,
+				21BC8539189DB6920042A6CD /* FlickrSupport */,
 				A591FAB11889C9800096EBE9 /* AppDelegate.h */,
 				A591FAB21889C9800096EBE9 /* AppDelegate.m */,
 				A591FAB41889C9800096EBE9 /* Main.storyboard */,
@@ -184,6 +252,8 @@
 				A526102F1891B26A00C87CB2 /* LoginViewController.m */,
 				A591FABA1889C9800096EBE9 /* Images.xcassets */,
 				A591FAA91889C9800096EBE9 /* Supporting Files */,
+				A5080905189ED32B009561FD /* VideoCell.h */,
+				A5080906189ED32B009561FD /* VideoCell.m */,
 			);
 			path = flipr;
 			sourceTree = "<group>";
@@ -191,6 +261,8 @@
 		A591FAA91889C9800096EBE9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				21BC854C189DBC360042A6CD /* FlickrCommons.h */,
+				A516FC4D189B0A3600164E5A /* IMG_0315.MOV */,
 				A591FAAA1889C9800096EBE9 /* flipr-Info.plist */,
 				A591FAAB1889C9800096EBE9 /* InfoPlist.strings */,
 				A591FAAE1889C9800096EBE9 /* main.m */,
@@ -295,7 +367,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C97643189F051E0096620D /* FlickrCell.xib in Resources */,
 				A591FABB1889C9800096EBE9 /* Images.xcassets in Resources */,
+				A516FC4E189B0A3600164E5A /* IMG_0315.MOV in Resources */,
 				A591FAAD1889C9800096EBE9 /* InfoPlist.strings in Resources */,
 				A591FAB61889C9800096EBE9 /* Main.storyboard in Resources */,
 			);
@@ -349,11 +423,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5080907189ED32B009561FD /* VideoCell.m in Sources */,
 				A591FAB31889C9800096EBE9 /* AppDelegate.m in Sources */,
 				A52610391891B88D00C87CB2 /* SelectPhotosViewController.m in Sources */,
 				A591FAAF1889C9800096EBE9 /* main.m in Sources */,
+				21BC8544189DB8980042A6CD /* FlickrUser.m in Sources */,
 				A52610301891B26A00C87CB2 /* LoginViewController.m in Sources */,
+				21BC854B189DBB730042A6CD /* NSDictionary+CPAdditions.m in Sources */,
+				21BC8541189DB8800042A6CD /* RestObject.m in Sources */,
 				A52610331891B2A000C87CB2 /* VideoTableViewController.m in Sources */,
+				21C97646189F06920096620D /* FlickrPhoto.m in Sources */,
+				21BC853E189DB8220042A6CD /* FlickrClient.m in Sources */,
+				21C97641189F04FA0096620D /* FlickrCell.m in Sources */,
 				A52610361891B84A00C87CB2 /* CreateVideoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,7 +563,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "flipr/flipr-Prefix.pch";
 				INFOPLIST_FILE = "flipr/flipr-Info.plist";
@@ -497,7 +578,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "flipr/flipr-Prefix.pch";
 				INFOPLIST_FILE = "flipr/flipr-Info.plist";

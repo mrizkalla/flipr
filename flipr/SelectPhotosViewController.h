@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SelectPhotosViewController : UICollectionViewController
+@interface SelectPhotosViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @end

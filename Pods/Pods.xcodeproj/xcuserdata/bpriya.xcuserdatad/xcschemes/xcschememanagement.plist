@@ -6,23 +6,64 @@
 	<dict>
 		<key>Pods-AFNetworking.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Pods-AFOAuth1Client.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Pods-DejalActivityView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>368FBF602C694428AF510347</key>
+		<key>6641FB706F254952AAFCCE7B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A9DCBA6A74DD43DE9CCE9652</key>
+		<key>9564DD4FE0B54F088A7962C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A0383748AF5A4E77A93A9F59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BBA2AF7B3A36485DB77DB9F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CA09B2CB4C124280BD7B8682</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6E739BD562C4D4691532902</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EBA5574F44DA4CB6A9246595</key>
 		<dict>
 			<key>primary</key>
 			<true/>
