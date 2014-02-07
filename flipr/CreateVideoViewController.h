@@ -11,4 +11,6 @@
 
 @interface CreateVideoViewController : UIViewController <AmazonServiceRequestDelegate>
 
+@property (nonatomic, strong) NSMutableArray *selectedPhotos;
+
 @end

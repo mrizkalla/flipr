@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    NSLog(@"selectedPhotos to create video: %@", self.selectedPhotos);
 
 }
 

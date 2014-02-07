@@ -9,13 +9,18 @@
 #import "SelectPhotosViewController.h"
 #import "FlickrCell.h"
 #import "FlickrPhoto.h"
+#import "DejalActivityView.h"
+#import "CreateVideoViewController.h"
 
+static int counter;
 
 @interface SelectPhotosViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *photoSourceSegmentControl;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *photosCollectionView;
 @property (nonatomic, strong) NSMutableArray *flickrImageResults;
+@property (nonatomic, strong) NSMutableArray *selectedPhotos;
+
 
 - (IBAction)photoSourceValueChanged:(id)sender;
 - (void) onSignIn;
@@ -47,6 +52,8 @@
     
     self.photosCollectionView.dataSource=self;
     self.photosCollectionView.delegate=self;
+    self.selectedPhotos = [@[] mutableCopy];
+    counter = 0;
     [self.photosCollectionView reloadData];
 }
 
@@ -63,6 +70,9 @@
     }else{
         NSLog(@"Selected Flickr");
         if([FlickrUser currentFlickrUser]){
+            // Start spinning the progress bar
+            [DejalBezelActivityView activityViewForView:self.navigationController.navigationBar.superview withLabel:@"Processing..."].showNetworkActivityIndicator = YES;
+            
             [self getUserPhotos];
             
         }else{
@@ -96,6 +106,7 @@
 }
 
 - (void) getUserPhotos{
+    
     [[FlickrClient instance] getFlickrPhotosWithCount:20  success:^(AFHTTPRequestOperation *operation, id response) {
 
         id results = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
@@ -107,7 +118,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // Do nothing
     }];
-
     
 }
 
@@ -119,7 +129,9 @@
 
 //Collection View method
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
+    // Stop spinning the progress bar
+    [DejalBezelActivityView removeViewAnimated:YES];
+    [collectionView setAllowsMultipleSelection:YES];
     return [self.flickrImageResults count];
     
 }
@@ -135,7 +147,7 @@
     FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
 
     
-    cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
 
     NSURL *fpURL =  [NSURL URLWithString:fp.photoURL];
     NSData *fpData = [[NSData alloc] initWithContentsOfURL: fpURL];
@@ -159,5 +171,29 @@
     
 }
 
+#pragma mark - NSNotification to select table cell
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"didSelectItemAtIndexPath: %@", indexPath);
+        
+    [self.selectedPhotos addObject:[self.flickrImageResults objectAtIndex:[indexPath row]]];
+    
+    NSLog(@"flickrImageSelected %@", self.selectedPhotos);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self.selectedPhotos removeObject:[self.flickrImageResults objectAtIndex:[indexPath row]]];
+    
+    NSLog(@"flickrImageSelected %@", self.selectedPhotos);
+
+}
+
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"CreateVideo"]) {
+        CreateVideoViewController *creatVideoViewController = segue.destinationViewController;
+        creatVideoViewController.selectedPhotos = self.selectedPhotos;
+    }
+}
 
 @end
