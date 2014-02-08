@@ -53,18 +53,25 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
 }
 
 - (void)currentUserWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"api_key": Flickr_CONSUMER_KEY}];
+    [params setObject:@"json" forKey:@"format"];
+    [params setObject:@"1" forKey:@"nojsoncallback"];
     
-    NSString *url = [NSString stringWithFormat:@"rest/?method=flickr.test.login&api_key=%@&format=json&nojsoncallback=1",Flickr_CONSUMER_KEY];
-    [self getPath:url parameters:nil success:success failure:failure];
+    NSString *url = [NSString stringWithFormat:@"rest/?method=flickr.test.login"];
+    [self getPath:url parameters:params success:success failure:failure];
     
 }
 
 #pragma mark - Statuses API
 - (void)getFlickrPhotosWithCount:(int)count success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"api_key": Flickr_CONSUMER_KEY}];
+    [params setObject:@"json" forKey:@"format"];
+    [params setObject:@"1" forKey:@"nojsoncallback"];
+    [params setObject:@"me" forKey:@"user_id"];
     
-    NSString *url = [NSString stringWithFormat:@"rest/?method=flickr.photos.search&api_key=%@&user_id=%@&format=json&nojsoncallback=1",Flickr_CONSUMER_KEY,@"me"];
+    NSString *url = [NSString stringWithFormat:@"rest/?method=flickr.photos.search"];
     
-    [self getPath:url parameters:nil success:success failure:failure];
+    [self getPath:url parameters:params success:success failure:failure];
 }
 
 #pragma mark - Private methods

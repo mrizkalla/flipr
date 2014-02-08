@@ -144,20 +144,53 @@ static int counter;
     //Dequeue or create cell of appropriate type
     FlickrCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
-    FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
+    //FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
 
     
-    cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
-
-    NSURL *fpURL =  [NSURL URLWithString:fp.photoURL];
-    NSData *fpData = [[NSData alloc] initWithContentsOfURL: fpURL];
-    UIImage *fpImage = [[UIImage alloc] initWithData:fpData];
     
-    [cell.flickrPhotoImageView setImage:fpImage];
+    
+    //Setting the flickr photo in the background process
+    [self performSelectorInBackground:@selector(requestFlickrImage:) withObject:indexPath];
+
+ 
     
     return cell;
     
 }
+
+#pragma mark - Image loading Methods
+#pragma mark - Image URL methods
+-(void) requestFlickrImage: (NSIndexPath *) indexPath{
+    
+    //NSLog (@"In request profile method");
+    
+    FlickrPhoto *currPhoto = [self.flickrImageResults objectAtIndex:indexPath.row];
+    NSURL *imageURL =  [NSURL URLWithString:currPhoto.photoURL];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL: imageURL];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    NSDictionary *params = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:indexPath,image,nil] forKeys:[NSArray arrayWithObjects:@"indexPath",@"image", nil]];
+    
+    [self performSelectorOnMainThread:@selector(putFlickrImage:) withObject:params waitUntilDone:NO];
+    
+}
+
+-(void) putFlickrImage:(NSDictionary * )params {
+    
+    // NSLog (@"In put Profile method");
+    
+    NSIndexPath *indexPath = [params valueForKeyPath:@"indexPath"];
+    UIImage *image = [params valueForKeyPath:@"image"];
+    
+    //NSLog (@"The row is :%u",indexPath.row);
+    UICollectionViewCell *fromcell =  [self.photosCollectionView cellForItemAtIndexPath:indexPath];
+    FlickrCell *cell = (FlickrCell *) fromcell;
+    cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.flickrPhotoImageView.layer.masksToBounds = YES;
+    [cell.flickrPhotoImageView setImage:image];
+    
+    
+}
+
 
 
 #pragma mark -UICollectiovViewFlowLayout delegate
@@ -165,7 +198,7 @@ static int counter;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CGSize retval;
-    retval = CGSizeMake(50, 50);
+    retval = CGSizeMake(100, 100);
     
     return retval;
     
