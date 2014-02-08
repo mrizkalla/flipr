@@ -7,28 +7,38 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="FlickrCell" reuseIdentifier="FlickrCell" id="cCk-CM-dQM" customClass="FlickrCell">
-            <rect key="frame" x="0.0" y="0.0" width="182" height="165"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="211"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="182" height="165"/>
+                <rect key="frame" x="0.0" y="0.0" width="480" height="211"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t7z-DZ-Yeh">
-                        <rect key="frame" x="5" y="5" width="172" height="155"/>
+                        <rect key="frame" x="3" y="0.0" width="475" height="215"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter your caption here .." borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xHc-S4-b3A">
+                        <rect key="frame" x="0.0" y="161" width="480" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="t7z-DZ-Yeh" firstAttribute="leading" secondItem="cCk-CM-dQM" secondAttribute="leading" constant="5" id="QPz-fP-aNt"/>
-                <constraint firstAttribute="bottom" secondItem="t7z-DZ-Yeh" secondAttribute="bottom" constant="5" id="RzG-ek-hDT"/>
-                <constraint firstItem="t7z-DZ-Yeh" firstAttribute="top" secondItem="cCk-CM-dQM" secondAttribute="top" constant="5" id="XdG-Ja-od4"/>
-                <constraint firstAttribute="trailing" secondItem="t7z-DZ-Yeh" secondAttribute="trailing" constant="5" id="YVw-3R-tej"/>
+                <constraint firstAttribute="bottom" secondItem="t7z-DZ-Yeh" secondAttribute="bottom" constant="-4" id="35B-vU-qNG"/>
+                <constraint firstItem="t7z-DZ-Yeh" firstAttribute="top" secondItem="cCk-CM-dQM" secondAttribute="top" id="AWj-o2-OmA"/>
+                <constraint firstAttribute="bottom" secondItem="xHc-S4-b3A" secondAttribute="bottom" constant="20" id="P01-TJ-eWn"/>
+                <constraint firstItem="t7z-DZ-Yeh" firstAttribute="leading" secondItem="cCk-CM-dQM" secondAttribute="leading" constant="3" id="iZA-Wa-Uf9"/>
+                <constraint firstItem="xHc-S4-b3A" firstAttribute="centerX" secondItem="t7z-DZ-Yeh" secondAttribute="centerX" id="lMk-lG-dB9"/>
+                <constraint firstItem="xHc-S4-b3A" firstAttribute="leading" secondItem="cCk-CM-dQM" secondAttribute="leading" id="okT-5H-Uro"/>
+                <constraint firstAttribute="trailing" secondItem="xHc-S4-b3A" secondAttribute="trailing" id="owg-4x-nLD"/>
             </constraints>
-            <size key="customSize" width="182" height="165"/>
+            <size key="customSize" width="480" height="211"/>
             <connections>
                 <outlet property="flickrPhotoImageView" destination="t7z-DZ-Yeh" id="o5M-pp-HlH"/>
+                <outlet property="photoCaption" destination="xHc-S4-b3A" id="SS9-CT-Jg6"/>
             </connections>
         </collectionViewCell>
     </objects>

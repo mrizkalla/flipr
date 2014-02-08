@@ -24,6 +24,7 @@ static int counter;
 @property (nonatomic, strong) NSMutableArray *selectedPhotos;
 
 
+
 - (IBAction)photoSourceValueChanged:(id)sender;
 - (void) onSignIn;
 - (void)onError;
@@ -90,10 +91,13 @@ static int counter;
     // Dispose of any resources that can be recreated.
 }
 
+
+
 - (IBAction)photoSourceValueChanged:(id)sender {
     
     if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
         NSLog(@"Selected Camera roll");
+        [self.photosCollectionView reloadData];
     }else{
         NSLog(@"Selected Flickr");
         if([FlickrUser currentFlickrUser]){
@@ -176,6 +180,10 @@ static int counter;
     
     //Dequeue or create cell of appropriate type
     FlickrCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.flickrPhotoImageView.layer.masksToBounds = YES;
+    cell.photoCaption.delegate = self;
+    
     
     if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
         cell.backgroundColor = [UIColor whiteColor];
@@ -183,14 +191,14 @@ static int counter;
         
         cell.flickrPhotoImageView.image = [UIImage imageWithCGImage:[asset thumbnail]];
         
+        
     }
         
     else{
         cell.backgroundColor = [UIColor whiteColor];
         //FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
     
-    
-    
+       
     
         //Setting the flickr photo in the background process
         [self performSelectorInBackground:@selector(requestFlickrImage:) withObject:indexPath];
@@ -227,8 +235,6 @@ static int counter;
     //NSLog (@"The row is :%u",indexPath.row);
     UICollectionViewCell *fromcell =  [self.photosCollectionView cellForItemAtIndexPath:indexPath];
     FlickrCell *cell = (FlickrCell *) fromcell;
-    cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    cell.flickrPhotoImageView.layer.masksToBounds = YES;
     [cell.flickrPhotoImageView setImage:image];
     
     
@@ -242,7 +248,6 @@ static int counter;
     
     CGSize retval;
     retval = CGSizeMake(150, 150);
-    
     return retval;
     
 }
@@ -292,5 +297,15 @@ static int counter;
     });
     return library;
 }
+
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+
 
 @end
