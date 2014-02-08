@@ -11,6 +11,7 @@
 #import <AWSS3/AWSS3.h>
 #import <AWSRuntime/AWSRuntime.h>
 #import "DejalActivityView.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 
 @interface CreateVideoViewController ()
@@ -42,6 +43,23 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     NSLog(@"selectedPhotos to create video: %@", self.selectedPhotos);
+    
+    for (id object in self.selectedPhotos) {
+        if( [object isKindOfClass:[FlickrPhoto class]]){
+            FlickrPhoto *myFp = object;
+            //NSLog(@"Object is of FlickrPhoto type");
+            NSString *urlStr = myFp.photoURL;
+            NSLog(@"The url for flickr photo is :%@",urlStr);
+        }else if([object isKindOfClass:[ALAsset class]]){
+            //NSLog(@"Object is of ALAsset class");
+            ALAsset *myCameraPhoto = object;
+            NSURL* urlStr = myCameraPhoto.defaultRepresentation.url;
+            NSLog(@"The url for camera photo is :%@",urlStr);
+            
+            
+        }
+        
+    }
 
 }
 
