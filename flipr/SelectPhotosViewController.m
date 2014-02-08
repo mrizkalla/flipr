@@ -11,6 +11,7 @@
 #import "FlickrPhoto.h"
 #import "DejalActivityView.h"
 #import "CreateVideoViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 static int counter;
 
@@ -19,6 +20,7 @@ static int counter;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *photosCollectionView;
 @property (nonatomic, strong) NSMutableArray *flickrImageResults;
+@property (nonatomic,strong) NSMutableArray *cameraImageResults;
 @property (nonatomic, strong) NSMutableArray *selectedPhotos;
 
 
@@ -26,7 +28,9 @@ static int counter;
 - (void) onSignIn;
 - (void)onError;
 - (void) getUserPhotos;
-
+-(void) requestFlickrImage: (NSIndexPath *) indexPath;
+-(void) putFlickrImage:(NSDictionary * )params;
+- (ALAssetsLibrary *)defaultAssetsLibrary;
 
 @end
 
@@ -55,7 +59,30 @@ static int counter;
     self.selectedPhotos = [@[] mutableCopy];
     counter = 0;
     [self.photosCollectionView reloadData];
+    
+    
+    //Setting up the photoSource
+    self.photoSourceSegmentControl.selectedSegmentIndex = 0;
+    
+    
+    //Loading the camera roll photos in the cameraImageResults first
+    _cameraImageResults = [@[] mutableCopy];
+    __block NSMutableArray *tmpAssets = [@[] mutableCopy];
+    ALAssetsLibrary *assetsLibrary = [self defaultAssetsLibrary];
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+            if(result)
+            {
+                [tmpAssets addObject:result];
+            }
+        }];
+        self.cameraImageResults = tmpAssets;
+        [self.photosCollectionView reloadData];
+    }failureBlock:^(NSError *error) {
+        NSLog(@"Error loading camera images %@", error);
+    }];
 }
+    
 
 - (void)didReceiveMemoryWarning
 {
@@ -132,7 +159,13 @@ static int counter;
     // Stop spinning the progress bar
     [DejalBezelActivityView removeViewAnimated:YES];
     [collectionView setAllowsMultipleSelection:YES];
-    return [self.flickrImageResults count];
+    
+    if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
+        return self.cameraImageResults.count;
+    }
+    else{
+        return [self.flickrImageResults count];
+    }
     
 }
 
@@ -143,14 +176,25 @@ static int counter;
     
     //Dequeue or create cell of appropriate type
     FlickrCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    //FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
-
+    
+    if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
+        cell.backgroundColor = [UIColor whiteColor];
+        ALAsset *asset = self.cameraImageResults[indexPath.row];
+        
+        cell.flickrPhotoImageView.image = [UIImage imageWithCGImage:[asset thumbnail]];
+        
+    }
+        
+    else{
+        cell.backgroundColor = [UIColor whiteColor];
+        //FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
     
     
     
-    //Setting the flickr photo in the background process
-    [self performSelectorInBackground:@selector(requestFlickrImage:) withObject:indexPath];
+    
+        //Setting the flickr photo in the background process
+        [self performSelectorInBackground:@selector(requestFlickrImage:) withObject:indexPath];
+    }
 
  
     
@@ -159,7 +203,6 @@ static int counter;
 }
 
 #pragma mark - Image loading Methods
-#pragma mark - Image URL methods
 -(void) requestFlickrImage: (NSIndexPath *) indexPath{
     
     //NSLog (@"In request profile method");
@@ -198,26 +241,35 @@ static int counter;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CGSize retval;
-    retval = CGSizeMake(100, 100);
+    retval = CGSizeMake(150, 150);
     
     return retval;
     
 }
 
-#pragma mark - NSNotification to select table cell
+#pragma mark - UICollection view selection methods
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"didSelectItemAtIndexPath: %@", indexPath);
-        
-    [self.selectedPhotos addObject:[self.flickrImageResults objectAtIndex:[indexPath row]]];
     
-    NSLog(@"flickrImageSelected %@", self.selectedPhotos);
+    if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
+        [self.selectedPhotos addObject:[self.cameraImageResults objectAtIndex:[indexPath row]]];
+    }else{
+        NSLog(@"flickrImageSelected %@", self.selectedPhotos);
+        [self.selectedPhotos addObject:[self.flickrImageResults objectAtIndex:[indexPath row]]];
+    }
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self.selectedPhotos removeObject:[self.flickrImageResults objectAtIndex:[indexPath row]]];
     
-    NSLog(@"flickrImageSelected %@", self.selectedPhotos);
+    if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
+        [self.selectedPhotos removeObject:[self.cameraImageResults objectAtIndex:[indexPath row]]];
+        
+    }else{
+        [self.selectedPhotos removeObject:[self.flickrImageResults objectAtIndex:[indexPath row]]];
+        NSLog(@"flickrImageSelected %@", self.selectedPhotos);
+    }
 
 }
 
@@ -227,6 +279,18 @@ static int counter;
         CreateVideoViewController *creatVideoViewController = segue.destinationViewController;
         creatVideoViewController.selectedPhotos = self.selectedPhotos;
     }
+}
+
+
+#pragma mark - Camera Roll methods
+- (ALAssetsLibrary *)defaultAssetsLibrary
+{
+    static dispatch_once_t pred = 0;
+    static ALAssetsLibrary *library = nil;
+    dispatch_once(&pred, ^{
+        library = [[ALAssetsLibrary alloc] init];
+    });
+    return library;
 }
 
 @end
