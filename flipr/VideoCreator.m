@@ -230,7 +230,7 @@
      */
 
 
-    [self saveMovieToCameraRoll];
+    // [self saveMovieToCameraRoll];
     
     
     
