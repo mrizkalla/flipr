@@ -12,15 +12,20 @@
 #import <AWSRuntime/AWSRuntime.h>
 #import "DejalActivityView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-
+#import "VideoCreator.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface CreateVideoViewController ()
-
+@property (weak, nonatomic) IBOutlet UIView *videoCanvasView;
 @property (weak, nonatomic) IBOutlet UITextField *videoTitleTextField;
+
 @property (nonatomic, strong) AmazonS3Client *s3;
+@property (nonatomic, strong) VideoCreator *vc;
+@property (nonatomic, strong) NSString *uniqueKey;
 
 - (IBAction)onDoneButton:(id)sender;
 - (void)getVideoUrl;
+
 
 @end
 
@@ -44,22 +49,31 @@
 	// Do any additional setup after loading the view.
     NSLog(@"selectedPhotos to create video: %@", self.selectedPhotos);
     
-    for (id object in self.selectedPhotos) {
-        if( [object isKindOfClass:[FlickrPhoto class]]){
-            FlickrPhoto *myFp = object;
-            //NSLog(@"Object is of FlickrPhoto type");
-            NSString *urlStr = myFp.photoURL;
-            NSLog(@"The url for flickr photo is :%@",urlStr);
-        }else if([object isKindOfClass:[ALAsset class]]){
-            //NSLog(@"Object is of ALAsset class");
-            ALAsset *myCameraPhoto = object;
-            NSURL* urlStr = myCameraPhoto.defaultRepresentation.url;
-            NSLog(@"The url for camera photo is :%@",urlStr);
-            
-            
-        }
+    self.vc = [[VideoCreator alloc] init];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        [self.vc createVideo:self.selectedPhotos];
         
-    }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Put the video up in the box now %@", [self.vc getVideoURL]);
+            MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:[self.vc getVideoURL]];
+            //player.view.frame = CGRectMake(0, 0, self.videoCanvasView.frame.size.width, self.videoCanvasView.frame.size.height);
+            [player.view setFrame:self.videoCanvasView.bounds];
+            player.controlStyle = MPMovieControlModeDefault;
+
+
+            
+            [self.videoCanvasView addSubview:player.view];
+            [player prepareToPlay];
+
+            [player play];
+            
+            
+              // player's frame must match parent's
+            
+            // Configure the movie player controller
+        });
+    });
 
 }
 
@@ -75,11 +89,12 @@
     [self.view endEditing:YES];
 
     // TODO - get the real video data and name - use a dummy for now
-    NSString *str=[[NSBundle mainBundle] pathForResource:@"IMG_0315" ofType:@"MOV"];
-    NSData *videoData = [NSData dataWithContentsOfFile:str ];
+//NSString *str=[[NSBundle mainBundle] pathForResource:@"IMG_0315" ofType:@"MOV"];
+    NSData *videoData = [NSData dataWithContentsOfURL:[self.vc getVideoURL]];
 
     // Push to S3
-    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:@"IMG_0315" inBucket:@"group13videos-akiajjh522j3c3god2va"];
+    self.uniqueKey = [NSString stringWithFormat:@"%@.%f",[[PFUser currentUser] username], [[NSDate date] timeIntervalSince1970]];
+    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:self.uniqueKey inBucket:@"group13videos-akiajjh522j3c3god2va"];
     por.contentType = @"video/quicktime";
     por.data = videoData;
     por.delegate = self;
@@ -126,7 +141,7 @@
         
         // Request a pre-signed URL to picture that has been uplaoded.
         S3GetPreSignedURLRequest *gpsur = [[S3GetPreSignedURLRequest alloc] init];
-        gpsur.key                     = @"IMG_0315";
+        gpsur.key                     = self.uniqueKey;
         gpsur.bucket                  = @"group13videos-akiajjh522j3c3god2va";
         gpsur.expires                 = [NSDate dateWithTimeIntervalSinceNow:(NSTimeInterval) 630720000]; // Added 20yrs worth of seconds to the current time.
         gpsur.responseHeaderOverrides = override;

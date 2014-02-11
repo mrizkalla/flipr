@@ -49,6 +49,8 @@
 		A591FAC41889C9800096EBE9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A591FAA61889C9800096EBE9 /* UIKit.framework */; };
 		A591FACC1889C9800096EBE9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A591FACA1889C9800096EBE9 /* InfoPlist.strings */; };
 		A591FACE1889C9800096EBE9 /* fliprTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A591FACD1889C9800096EBE9 /* fliprTests.m */; };
+		A5C2A53518AA04BE0006FB1D /* VideoCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C2A53418AA04BE0006FB1D /* VideoCreator.m */; };
+		A5C2A53718AA09C60006FB1D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C2A53618AA09C60006FB1D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +123,9 @@
 		A591FAC91889C9800096EBE9 /* fliprTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "fliprTests-Info.plist"; sourceTree = "<group>"; };
 		A591FACB1889C9800096EBE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A591FACD1889C9800096EBE9 /* fliprTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fliprTests.m; sourceTree = "<group>"; };
+		A5C2A53318AA04BE0006FB1D /* VideoCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCreator.h; sourceTree = "<group>"; };
+		A5C2A53418AA04BE0006FB1D /* VideoCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCreator.m; sourceTree = "<group>"; };
+		A5C2A53618AA09C60006FB1D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5C2A53718AA09C60006FB1D /* AVFoundation.framework in Frameworks */,
 				217B314818A6C4EB00D44D47 /* AssetsLibrary.framework in Frameworks */,
 				A516FC57189C157000164E5A /* AWSRuntime.framework in Frameworks */,
 				A516FC58189C157000164E5A /* AWSS3.framework in Frameworks */,
@@ -214,6 +220,7 @@
 		A591FAA11889C9800096EBE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5C2A53618AA09C60006FB1D /* AVFoundation.framework */,
 				217B314718A6C4EB00D44D47 /* AssetsLibrary.framework */,
 				A516FC55189C157000164E5A /* AWSRuntime.framework */,
 				A516FC56189C157000164E5A /* AWSS3.framework */,
@@ -252,6 +259,8 @@
 				A52610351891B84A00C87CB2 /* CreateVideoViewController.m */,
 				A52610311891B2A000C87CB2 /* VideoTableViewController.h */,
 				A52610321891B2A000C87CB2 /* VideoTableViewController.m */,
+				A5C2A53318AA04BE0006FB1D /* VideoCreator.h */,
+				A5C2A53418AA04BE0006FB1D /* VideoCreator.m */,
 				A526102E1891B26A00C87CB2 /* LoginViewController.h */,
 				A526102F1891B26A00C87CB2 /* LoginViewController.m */,
 				A591FABA1889C9800096EBE9 /* Images.xcassets */,
@@ -427,6 +436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5C2A53518AA04BE0006FB1D /* VideoCreator.m in Sources */,
 				A5080907189ED32B009561FD /* VideoCell.m in Sources */,
 				A591FAB31889C9800096EBE9 /* AppDelegate.m in Sources */,
 				A52610391891B88D00C87CB2 /* SelectPhotosViewController.m in Sources */,
