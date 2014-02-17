@@ -92,17 +92,33 @@
     
     for(id object in self.selectedPhotos) {
         NSURL *urlStr;
+        NSString *photoText = @"";
+        CGImageRef imref = Nil;
         if([object isKindOfClass:[FlickrPhoto class]]) {
             FlickrPhoto *myFp = object;
             urlStr = [NSURL URLWithString:myFp.photoURL];
-            NSLog(@"The url for flickr photo is :%@",urlStr);
-        } else if([object isKindOfClass:[ALAsset class]]) {
+            if(myFp.photoCaption){
+                photoText = myFp.photoCaption;
+            }
+            NSLog(@"The url for flickr photo is :%@ and the caption is : %@",urlStr,photoText);
+            imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
+            
+        } else if([object isKindOfClass:[CameraPhoto class]]) {
+            
             ALAsset *myCameraPhoto = object;
             urlStr = myCameraPhoto.defaultRepresentation.url;
-            NSLog(@"The url for camera photo is :%@",urlStr);
+            CameraPhoto *myCp = object;
+            //urlStr = [NSURL URLWithString:myCameraPhoto.photoURL];
+            //urlStr = [NSURL URLWithString:@""];
+            if(myCp.photoCaption){
+                photoText= myCp.photoCaption;
+            }
+            NSLog(@"The url for camera photo is :%@ and the caption is :%@",urlStr,photoText);
+            //imref = [[UIImage imageWithCGImage:[myCameraPhoto thumbnail] CGImage];
+            imref = [myCameraPhoto thumbnail];
         }
         
-        CGImageRef imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
+        //CGImageRef imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
         
         buffer = [self pixelBufferFromCGImage:imref andSize:size];
         

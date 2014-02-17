@@ -29,6 +29,8 @@
         bgView.layer.borderColor = [[UIColor whiteColor] CGColor];
         bgView.layer.borderWidth = 4;
         self.selectedBackgroundView = bgView;
+       
+        
     }
     return self;
 }

@@ -18,6 +18,7 @@
 #import "RestObject.h"
 #import "FlickrUser.h"
 #import "FlickrPhoto.h"
+#import "CameraPhoto.h"
 
 // Categories
 #import "NSDictionary+CPAdditions.h"

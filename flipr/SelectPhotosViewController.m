@@ -9,11 +9,14 @@
 #import "SelectPhotosViewController.h"
 #import "FlickrCell.h"
 #import "FlickrPhoto.h"
+#import "CameraPhoto.h"
 #import "DejalActivityView.h"
 #import "CreateVideoViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <objc/runtime.h>
 
 static int counter;
+static char indexPathKey;
 
 @interface SelectPhotosViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *photoSourceSegmentControl;
@@ -22,6 +25,9 @@ static int counter;
 @property (nonatomic, strong) NSMutableArray *flickrImageResults;
 @property (nonatomic,strong) NSMutableArray *cameraImageResults;
 @property (nonatomic, strong) NSMutableArray *selectedPhotos;
+@property (nonatomic,strong) UIBarButtonItem *cancelButton;
+@property (nonatomic,strong) UIBarButtonItem *createButtonStored;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *createButton;
 
 
 
@@ -32,6 +38,7 @@ static int counter;
 -(void) requestFlickrImage: (NSIndexPath *) indexPath;
 -(void) putFlickrImage:(NSDictionary * )params;
 - (ALAssetsLibrary *)defaultAssetsLibrary;
+- (void) onCancelButton;
 
 @end
 
@@ -64,7 +71,8 @@ static int counter;
     
     //Setting up the photoSource
     self.photoSourceSegmentControl.selectedSegmentIndex = 0;
-    
+    self.cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonSystemItemCancel target:self action:@selector(onCancelButton)];
+                       
     
     //Loading the camera roll photos in the cameraImageResults first
     _cameraImageResults = [@[] mutableCopy];
@@ -77,7 +85,9 @@ static int counter;
                 [tmpAssets addObject:result];
             }
         }];
-        self.cameraImageResults = tmpAssets;
+        //self.cameraImageResults = tmpAssets;
+        self.cameraImageResults = [CameraPhoto photosWithArray:tmpAssets];
+        NSLog(@"User camera roll pics : %@",tmpAssets);
         [self.photosCollectionView reloadData];
     }failureBlock:^(NSError *error) {
         NSLog(@"Error loading camera images %@", error);
@@ -142,7 +152,7 @@ static int counter;
 
         id results = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
         id photos = [[ results objectForKey:@"photos"] objectForKey:@"photo"];
-        NSLog(@"User pics: %@", photos);
+        NSLog(@"User Flickr pics: %@", photos);
         self.flickrImageResults = [FlickrPhoto photosWithArray:photos];
         [self.photosCollectionView reloadData];
         
@@ -177,29 +187,29 @@ static int counter;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *CellIdentifier = @"FlickrCell";
-    
     //Dequeue or create cell of appropriate type
     FlickrCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
     cell.flickrPhotoImageView.layer.masksToBounds = YES;
     cell.photoCaption.delegate = self;
-    
+    [cell.photoCaption setText:@"Enter your caption here"];
+    [cell.photoCaption setTextColor:[UIColor lightGrayColor]];
+    objc_setAssociatedObject(cell.photoCaption,&indexPathKey , indexPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
         cell.backgroundColor = [UIColor whiteColor];
         ALAsset *asset = self.cameraImageResults[indexPath.row];
         
         cell.flickrPhotoImageView.image = [UIImage imageWithCGImage:[asset thumbnail]];
-        
+        CameraPhoto *currPhoto = self.cameraImageResults[indexPath.row];
+        NSLog(@"CameraPhoto :%@",currPhoto);
+       // NSLog(@"ALAsset :%@", asset);
         
     }
         
     else{
         cell.backgroundColor = [UIColor whiteColor];
         //FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
-    
-       
-    
         //Setting the flickr photo in the background process
         [self performSelectorInBackground:@selector(requestFlickrImage:) withObject:indexPath];
     }
@@ -300,11 +310,42 @@ static int counter;
 
 #pragma mark - UITextFieldDelegate methods
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    NSIndexPath *indexPath = objc_getAssociatedObject(textField, &indexPathKey);
+    [self.photosCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    if (textField.textColor == [UIColor lightGrayColor]){
+        textField.text = @"";
+        textField.textColor = [UIColor blackColor];
+    }
+
+    self.createButtonStored = self.createButton;
+    self.navigationItem.rightBarButtonItem = self.cancelButton;
+    return YES;
+}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSIndexPath *indexPath = objc_getAssociatedObject(textField, &indexPathKey);
     [textField resignFirstResponder];
+    
+    if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
+        CameraPhoto *currPhoto = [self.cameraImageResults objectAtIndex:indexPath.row];
+        currPhoto.photoCaption = textField.text;
+        
+    }else{
+        FlickrPhoto *currPhoto = [self.flickrImageResults objectAtIndex:indexPath.row];
+        currPhoto.photoCaption = textField.text;
+    }
+    
+    self.createButton = self.createButtonStored;
+    self.navigationItem.rightBarButtonItem = self.createButton;
     return YES;
 }
 
+- (void) onCancelButton{
+    
+    self.createButton = self.createButtonStored;
+    self.navigationItem.rightBarButtonItem = self.createButton;
+    [self.view endEditing:YES];
+}
 
 
 

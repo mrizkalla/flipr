@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		11F3603F342F42D5ADEC7FAB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C95DB1112134393978A29DE /* libPods.a */; };
 		217B314818A6C4EB00D44D47 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217B314718A6C4EB00D44D47 /* AssetsLibrary.framework */; };
+		21A7E44F18B193BB0080C9C5 /* CameraPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7E44E18B193BB0080C9C5 /* CameraPhoto.m */; };
 		21BC853E189DB8220042A6CD /* FlickrClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC853D189DB8220042A6CD /* FlickrClient.m */; };
 		21BC8541189DB8800042A6CD /* RestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC8540189DB8800042A6CD /* RestObject.m */; };
 		21BC8544189DB8980042A6CD /* FlickrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC8543189DB8980042A6CD /* FlickrUser.m */; };
@@ -66,6 +67,8 @@
 /* Begin PBXFileReference section */
 		1C95DB1112134393978A29DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		217B314718A6C4EB00D44D47 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		21A7E44D18B193BB0080C9C5 /* CameraPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraPhoto.h; sourceTree = "<group>"; };
+		21A7E44E18B193BB0080C9C5 /* CameraPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraPhoto.m; sourceTree = "<group>"; };
 		21BC853C189DB8220042A6CD /* FlickrClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrClient.h; sourceTree = "<group>"; };
 		21BC853D189DB8220042A6CD /* FlickrClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrClient.m; sourceTree = "<group>"; };
 		21BC853F189DB8800042A6CD /* RestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestObject.h; path = flipr/RestObject.h; sourceTree = "<group>"; };
@@ -192,6 +195,8 @@
 				21BC8540189DB8800042A6CD /* RestObject.m */,
 				21BC8549189DBB730042A6CD /* NSDictionary+CPAdditions.h */,
 				21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */,
+				21A7E44D18B193BB0080C9C5 /* CameraPhoto.h */,
+				21A7E44E18B193BB0080C9C5 /* CameraPhoto.m */,
 			);
 			name = RestSupport;
 			path = ..;
@@ -446,6 +451,7 @@
 				21BC854B189DBB730042A6CD /* NSDictionary+CPAdditions.m in Sources */,
 				21BC8541189DB8800042A6CD /* RestObject.m in Sources */,
 				A52610331891B2A000C87CB2 /* VideoTableViewController.m in Sources */,
+				21A7E44F18B193BB0080C9C5 /* CameraPhoto.m in Sources */,
 				21C97646189F06920096620D /* FlickrPhoto.m in Sources */,
 				21BC853E189DB8220042A6CD /* FlickrClient.m in Sources */,
 				21C97641189F04FA0096620D /* FlickrCell.m in Sources */,
