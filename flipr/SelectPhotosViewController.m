@@ -192,8 +192,6 @@ static char indexPathKey;
     cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
     cell.flickrPhotoImageView.layer.masksToBounds = YES;
     cell.photoCaption.delegate = self;
-    [cell.photoCaption setText:@"Enter your caption here"];
-    [cell.photoCaption setTextColor:[UIColor lightGrayColor]];
     objc_setAssociatedObject(cell.photoCaption,&indexPathKey , indexPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
@@ -202,14 +200,27 @@ static char indexPathKey;
         
         cell.flickrPhotoImageView.image = [UIImage imageWithCGImage:[asset thumbnail]];
         CameraPhoto *currPhoto = self.cameraImageResults[indexPath.row];
-        NSLog(@"CameraPhoto :%@",currPhoto);
-       // NSLog(@"ALAsset :%@", asset);
+        if(currPhoto.photoCaption){
+            cell.photoCaption.text = currPhoto.photoCaption;
+            [cell.photoCaption setTextColor:[UIColor blackColor]];
+        }else{
+            [cell.photoCaption setText:@"Enter a caption.."];
+            [cell.photoCaption setTextColor:[UIColor lightGrayColor]];
+        }
         
     }
         
     else{
+        
         cell.backgroundColor = [UIColor whiteColor];
-        //FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
+        FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
+        if(cell.photoCaption){
+            cell.photoCaption.text = fp.photoCaption;
+            [cell.photoCaption setTextColor:[UIColor blackColor]];
+        }else{
+            [cell.photoCaption setText:@"Enter a caption.."];
+            [cell.photoCaption setTextColor:[UIColor lightGrayColor]];
+        }
         //Setting the flickr photo in the background process
         [self performSelectorInBackground:@selector(requestFlickrImage:) withObject:indexPath];
     }
