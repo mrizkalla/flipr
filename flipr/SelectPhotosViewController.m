@@ -197,8 +197,11 @@ static char indexPathKey;
     if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
         cell.backgroundColor = [UIColor whiteColor];
         ALAsset *asset = self.cameraImageResults[indexPath.row];
+        //Displaying full size photo
+        ALAssetRepresentation *rep = [asset defaultRepresentation];
+        CGImageRef iref = [rep fullResolutionImage];
+        cell.flickrPhotoImageView.image = [UIImage imageWithCGImage:iref];
         
-        cell.flickrPhotoImageView.image = [UIImage imageWithCGImage:[asset thumbnail]];
         CameraPhoto *currPhoto = self.cameraImageResults[indexPath.row];
         if(currPhoto.photoCaption){
             cell.photoCaption.text = currPhoto.photoCaption;

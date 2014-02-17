@@ -114,8 +114,8 @@
                 photoText= myCp.photoCaption;
             }
             NSLog(@"The url for camera photo is :%@ and the caption is :%@",urlStr,photoText);
-            //imref = [[UIImage imageWithCGImage:[myCameraPhoto thumbnail] CGImage];
-            imref = [myCameraPhoto thumbnail];
+            ALAssetRepresentation *rep = [myCameraPhoto defaultRepresentation];
+            imref = [rep fullResolutionImage];
         }
         
         //CGImageRef imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
