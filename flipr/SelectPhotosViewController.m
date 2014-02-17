@@ -217,7 +217,7 @@ static char indexPathKey;
         
         cell.backgroundColor = [UIColor whiteColor];
         FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
-        if(cell.photoCaption){
+        if(fp.photoCaption){
             cell.photoCaption.text = fp.photoCaption;
             [cell.photoCaption setTextColor:[UIColor blackColor]];
         }else{
