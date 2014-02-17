@@ -354,6 +354,18 @@ static char indexPathKey;
     return YES;
 }
 
+-(void) textFieldDidEndEditing:(UITextField *)textField{
+    NSIndexPath *indexPath = objc_getAssociatedObject(textField, &indexPathKey);
+    if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
+        CameraPhoto *currPhoto = [self.cameraImageResults objectAtIndex:indexPath.row];
+        currPhoto.photoCaption = textField.text;
+        
+    }else{
+        FlickrPhoto *currPhoto = [self.flickrImageResults objectAtIndex:indexPath.row];
+        currPhoto.photoCaption = textField.text;
+    }
+    
+}
 - (void) onCancelButton{
     
     self.createButton = self.createButtonStored;
