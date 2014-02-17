@@ -22,6 +22,7 @@
 @property (nonatomic, strong) AmazonS3Client *s3;
 @property (nonatomic, strong) VideoCreator *vc;
 @property (nonatomic, strong) NSString *uniqueKey;
+@property (nonatomic, strong) MPMoviePlayerController *player;
 
 - (IBAction)onDoneButton:(id)sender;
 - (void)getVideoUrl;
@@ -56,18 +57,20 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"Put the video up in the box now %@", [self.vc getVideoURL]);
-            MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:[self.vc getVideoURL]];
+            self.player = [[MPMoviePlayerController alloc] initWithContentURL:[self.vc getVideoURL]];
+            self.player.movieSourceType = MPMovieSourceTypeFile;
+
+            [self.player prepareToPlay];
+
             //player.view.frame = CGRectMake(0, 0, self.videoCanvasView.frame.size.width, self.videoCanvasView.frame.size.height);
-            [player.view setFrame:self.videoCanvasView.bounds];
-            player.controlStyle = MPMovieControlModeDefault;
+            [self.player.view setFrame:self.videoCanvasView.bounds];
 
 
             
-            [self.videoCanvasView addSubview:player.view];
-            [player prepareToPlay];
+            [self.videoCanvasView addSubview:self.player.view];
 
-            [player play];
-            
+            [self.player play];
+ 
             
               // player's frame must match parent's
             

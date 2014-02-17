@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="GUy-ea-6pg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="GUy-ea-6pg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Select Photos View Controller-->
@@ -121,22 +121,12 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IY7-2U-ZWV">
-                                        <rect key="frame" x="19" y="69" width="281" height="132"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created Video will play here" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QQ-d4-tth">
-                                                <rect key="frame" x="34" y="63" width="213" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
                                         <color key="backgroundColor" red="0.14217350198880097" green="1" blue="0.90807202828848654" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="5QQ-d4-tth" firstAttribute="top" secondItem="IY7-2U-ZWV" secondAttribute="top" constant="63" id="Klt-1E-l3x"/>
-                                            <constraint firstAttribute="bottom" secondItem="5QQ-d4-tth" secondAttribute="bottom" constant="48" id="NgS-7j-poD"/>
-                                            <constraint firstItem="5QQ-d4-tth" firstAttribute="centerX" secondItem="IY7-2U-ZWV" secondAttribute="centerX" id="kYV-RZ-25x"/>
+                                            <constraint firstAttribute="height" constant="190" id="rvD-NY-Ht4"/>
+                                            <constraint firstAttribute="width" constant="320" id="tKP-2g-oAS"/>
                                         </constraints>
                                     </view>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8Z-LU-1HC">
@@ -154,19 +144,20 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="a2E-BO-BjH" firstAttribute="leading" secondItem="dRg-MO-4nQ" secondAttribute="leading" id="5Py-tG-HVV"/>
-                                    <constraint firstAttribute="trailing" secondItem="Wzt-H3-KAS" secondAttribute="trailing" constant="20" symbolic="YES" id="5wJ-Co-RqH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wzt-H3-KAS" secondAttribute="trailing" constant="19" id="5wJ-Co-RqH"/>
                                     <constraint firstItem="gPH-VX-K1S" firstAttribute="trailing" secondItem="hNf-XQ-6J8" secondAttribute="trailing" id="ByU-Op-anS"/>
                                     <constraint firstItem="gPH-VX-K1S" firstAttribute="top" secondItem="Yuc-fj-MLO" secondAttribute="bottom" constant="8" symbolic="YES" id="Fbi-7I-nAk"/>
-                                    <constraint firstItem="IY7-2U-ZWV" firstAttribute="leading" secondItem="hNf-XQ-6J8" secondAttribute="leading" id="GPu-bP-JSi"/>
-                                    <constraint firstItem="Wzt-H3-KAS" firstAttribute="top" secondItem="IY7-2U-ZWV" secondAttribute="bottom" constant="8" symbolic="YES" id="JfP-Sj-1sw"/>
+                                    <constraint firstItem="IY7-2U-ZWV" firstAttribute="leading" secondItem="hNf-XQ-6J8" secondAttribute="leading" constant="-19" id="GPu-bP-JSi"/>
+                                    <constraint firstItem="Wzt-H3-KAS" firstAttribute="top" secondItem="IY7-2U-ZWV" secondAttribute="bottom" constant="19" id="JfP-Sj-1sw"/>
                                     <constraint firstItem="dRg-MO-4nQ" firstAttribute="top" secondItem="a2E-BO-BjH" secondAttribute="bottom" constant="19" id="VOe-Cm-izN"/>
                                     <constraint firstItem="hNf-XQ-6J8" firstAttribute="top" secondItem="Wzt-H3-KAS" secondAttribute="bottom" constant="15" id="Vo9-BJ-grz"/>
                                     <constraint firstItem="Yuc-fj-MLO" firstAttribute="top" secondItem="hNf-XQ-6J8" secondAttribute="bottom" constant="15" id="Wha-pi-r1z"/>
                                     <constraint firstItem="Wzt-H3-KAS" firstAttribute="leading" secondItem="Yuc-fj-MLO" secondAttribute="leading" id="Yel-BD-Pw8"/>
+                                    <constraint firstItem="IY7-2U-ZWV" firstAttribute="leading" secondItem="gre-Ij-oNh" secondAttribute="leading" id="bnD-Ex-Qnz"/>
                                     <constraint firstItem="a2E-BO-BjH" firstAttribute="leading" secondItem="gPH-VX-K1S" secondAttribute="leading" id="chQ-j1-cfO"/>
-                                    <constraint firstAttribute="trailing" secondItem="IY7-2U-ZWV" secondAttribute="trailing" constant="21" id="fri-8g-vHN"/>
+                                    <constraint firstAttribute="trailing" secondItem="IY7-2U-ZWV" secondAttribute="trailing" id="fri-8g-vHN"/>
                                     <constraint firstItem="k8Z-LU-1HC" firstAttribute="leading" secondItem="gre-Ij-oNh" secondAttribute="leading" id="ggF-6w-4wG"/>
-                                    <constraint firstItem="IY7-2U-ZWV" firstAttribute="top" secondItem="gre-Ij-oNh" secondAttribute="top" constant="69" id="hYk-IO-272"/>
+                                    <constraint firstItem="IY7-2U-ZWV" firstAttribute="top" secondItem="gre-Ij-oNh" secondAttribute="top" id="hYk-IO-272"/>
                                     <constraint firstItem="gPH-VX-K1S" firstAttribute="leading" secondItem="hNf-XQ-6J8" secondAttribute="leading" id="ieH-PZ-NQN"/>
                                     <constraint firstItem="dRg-MO-4nQ" firstAttribute="trailing" secondItem="a2E-BO-BjH" secondAttribute="trailing" id="isI-Jg-pOE"/>
                                     <constraint firstItem="Wzt-H3-KAS" firstAttribute="leading" secondItem="gre-Ij-oNh" secondAttribute="leading" constant="20" symbolic="YES" id="lNx-VL-dsD"/>
@@ -175,10 +166,11 @@
                                     <constraint firstItem="Yuc-fj-MLO" firstAttribute="centerX" secondItem="gre-Ij-oNh" secondAttribute="centerX" id="q4I-lq-ORC"/>
                                     <constraint firstItem="Yuc-fj-MLO" firstAttribute="trailing" secondItem="Wzt-H3-KAS" secondAttribute="trailing" id="qOI-d8-2dm"/>
                                     <constraint firstItem="k8Z-LU-1HC" firstAttribute="top" secondItem="Yuc-fj-MLO" secondAttribute="bottom" constant="15" id="qgf-92-UZ8"/>
+                                    <constraint firstItem="IY7-2U-ZWV" firstAttribute="top" secondItem="gre-Ij-oNh" secondAttribute="top" id="r5W-OD-xlz"/>
                                     <constraint firstAttribute="bottom" secondItem="dRg-MO-4nQ" secondAttribute="bottom" constant="75" id="tcH-Js-pWU"/>
                                     <constraint firstItem="a2E-BO-BjH" firstAttribute="trailing" secondItem="gPH-VX-K1S" secondAttribute="trailing" id="vDT-1X-yYI"/>
-                                    <constraint firstItem="hNf-XQ-6J8" firstAttribute="trailing" secondItem="IY7-2U-ZWV" secondAttribute="trailing" id="w1L-Ed-TH6"/>
-                                    <constraint firstItem="IY7-2U-ZWV" firstAttribute="leading" secondItem="gre-Ij-oNh" secondAttribute="leading" constant="19" id="yZb-Pu-R3q"/>
+                                    <constraint firstItem="hNf-XQ-6J8" firstAttribute="trailing" secondItem="IY7-2U-ZWV" secondAttribute="trailing" constant="-20" id="w1L-Ed-TH6"/>
+                                    <constraint firstItem="IY7-2U-ZWV" firstAttribute="leading" secondItem="gre-Ij-oNh" secondAttribute="leading" id="yZb-Pu-R3q"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -205,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jc6-PA-nle" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="779" y="-246"/>
+            <point key="canvasLocation" x="766" y="-229"/>
         </scene>
         <!--Video Table View Controller - flipr-->
         <scene sceneID="Lep-kh-Qpo">
