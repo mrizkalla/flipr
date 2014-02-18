@@ -16,7 +16,7 @@
     NSString *photoFarm = [self.data valueOrNilForKeyPath:@"farm"];
     NSString *photoServer = [self.data valueOrNilForKeyPath:@"server"];
     
-    NSString *photoURL = [NSString stringWithFormat:@"http://farm%@.staticflickr.com/%@/%@_%@_m.jpg",photoFarm,photoServer,photoId,photoSecret];
+    NSString *photoURL = [NSString stringWithFormat:@"http://farm%@.staticflickr.com/%@/%@_%@_n.jpg",photoFarm,photoServer,photoId,photoSecret];
     return photoURL;
 }
 

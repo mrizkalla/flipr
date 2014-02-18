@@ -15,6 +15,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <objc/runtime.h>
 
+
 static int counter;
 static char indexPathKey;
 
@@ -92,8 +93,21 @@ static char indexPathKey;
     }failureBlock:^(NSError *error) {
         NSLog(@"Error loading camera images %@", error);
     }];
-}
     
+    //Loading the flickr images if the user is logged in
+    if([FlickrUser currentFlickrUser]){
+        // Start spinning the progress bar
+        [DejalBezelActivityView activityViewForView:self.navigationController.navigationBar.superview withLabel:@"Processing..."].showNetworkActivityIndicator = YES;
+        [self getUserPhotos];
+        [self.photosCollectionView reloadData];
+        
+    }
+    
+    
+  
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -102,9 +116,10 @@ static char indexPathKey;
 }
 
 
-
+#pragma mark PhotoSource selector
 - (IBAction)photoSourceValueChanged:(id)sender {
     
+    NSLog(@"Count of selected photos :%u",self.selectedPhotos.count);
     if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
         NSLog(@"Selected Camera roll");
         [self.photosCollectionView reloadData];
@@ -113,14 +128,14 @@ static char indexPathKey;
         if([FlickrUser currentFlickrUser]){
             // Start spinning the progress bar
             [DejalBezelActivityView activityViewForView:self.navigationController.navigationBar.superview withLabel:@"Processing..."].showNetworkActivityIndicator = YES;
-            
-            [self getUserPhotos];
+            [self.photosCollectionView reloadData];
             
         }else{
             
             [self onSignIn];
         }
     }
+   
     
 }
 -(void) onSignIn{
@@ -188,14 +203,30 @@ static char indexPathKey;
     
     static NSString *CellIdentifier = @"FlickrCell";
     //Dequeue or create cell of appropriate type
+    
+    if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
+        if([self.selectedPhotos containsObject:(self.cameraImageResults[indexPath.row])]){
+            NSLog(@"SelectItem called for camera roll");
+            [self.photosCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        }
+
+    }else{
+        if([self.selectedPhotos containsObject:(self.flickrImageResults[indexPath.row])]){
+            NSLog(@"SelectItem called for flickr images");
+            [self.photosCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+            
+        }
+         
+    }
     FlickrCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.flickrPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
     cell.flickrPhotoImageView.layer.masksToBounds = YES;
     cell.photoCaption.delegate = self;
     objc_setAssociatedObject(cell.photoCaption,&indexPathKey , indexPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
-    if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
-        cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor whiteColor];
+        if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
+        
         ALAsset *asset = self.cameraImageResults[indexPath.row];
         //Displaying full size photo
         ALAssetRepresentation *rep = [asset defaultRepresentation];
@@ -211,11 +242,11 @@ static char indexPathKey;
             [cell.photoCaption setTextColor:[UIColor lightGrayColor]];
         }
         
+            
     }
         
     else{
         
-        cell.backgroundColor = [UIColor whiteColor];
         FlickrPhoto *fp = self.flickrImageResults[indexPath.row];
         if(fp.photoCaption){
             cell.photoCaption.text = fp.photoCaption;
@@ -225,6 +256,8 @@ static char indexPathKey;
             [cell.photoCaption setTextColor:[UIColor lightGrayColor]];
         }
         //Setting the flickr photo in the background process
+       
+
         [self performSelectorInBackground:@selector(requestFlickrImage:) withObject:indexPath];
     }
 
@@ -233,7 +266,8 @@ static char indexPathKey;
     return cell;
     
 }
-
+- (void)prepareForReuse{
+}
 #pragma mark - Image loading Methods
 -(void) requestFlickrImage: (NSIndexPath *) indexPath{
     
@@ -245,7 +279,7 @@ static char indexPathKey;
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     NSDictionary *params = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:indexPath,image,nil] forKeys:[NSArray arrayWithObjects:@"indexPath",@"image", nil]];
     
-    [self performSelectorOnMainThread:@selector(putFlickrImage:) withObject:params waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(putFlickrImage:) withObject:params waitUntilDone:YES];
     
 }
 
@@ -259,7 +293,7 @@ static char indexPathKey;
     //NSLog (@"The row is :%u",indexPath.row);
     UICollectionViewCell *fromcell =  [self.photosCollectionView cellForItemAtIndexPath:indexPath];
     FlickrCell *cell = (FlickrCell *) fromcell;
-    [cell.flickrPhotoImageView setImage:image];
+    cell.flickrPhotoImageView.image = image;
     
     
 }
@@ -280,6 +314,7 @@ static char indexPathKey;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"didSelectItemAtIndexPath: %@", indexPath);
+
     
     if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
         [self.selectedPhotos addObject:[self.cameraImageResults objectAtIndex:[indexPath row]]];
@@ -287,18 +322,21 @@ static char indexPathKey;
         NSLog(@"flickrImageSelected %@", self.selectedPhotos);
         [self.selectedPhotos addObject:[self.flickrImageResults objectAtIndex:[indexPath row]]];
     }
+
     
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+
     
     if(self.photoSourceSegmentControl.selectedSegmentIndex == 0){
         [self.selectedPhotos removeObject:[self.cameraImageResults objectAtIndex:[indexPath row]]];
         
     }else{
         [self.selectedPhotos removeObject:[self.flickrImageResults objectAtIndex:[indexPath row]]];
-        NSLog(@"flickrImageSelected %@", self.selectedPhotos);
+        NSLog(@"flickrImageDeSelected %@", self.selectedPhotos);
     }
+    
 
 }
 
