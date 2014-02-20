@@ -40,6 +40,8 @@ static char indexPathKey;
 -(void) putFlickrImage:(NSDictionary * )params;
 - (ALAssetsLibrary *)defaultAssetsLibrary;
 - (void) onCancelButton;
+-(void) keyboardDidAppear:(NSNotification*) notification;
+-(void) keyboardDidDisappear:(NSNotification*) notification;
 
 @end
 
@@ -103,8 +105,9 @@ static char indexPathKey;
         
     }
     
-    
-  
+    //Add observer for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidAppear:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidDisappear:) name:UIKeyboardWillHideNotification object:nil];
     
 }
 
@@ -363,6 +366,7 @@ static char indexPathKey;
 #pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    NSLog(@"textfield should begin editing ");
     NSIndexPath *indexPath = objc_getAssociatedObject(textField, &indexPathKey);
     [self.photosCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     if (textField.textColor == [UIColor lightGrayColor]){
@@ -412,5 +416,20 @@ static char indexPathKey;
 }
 
 
+- (void)keyboardDidAppear:(NSNotification*) notification{
+   
+    NSDictionary *keyboardInfo = [notification userInfo];
+    CGRect keyboardEndFrame = [[keyboardInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardFrame = [self.view convertRect:keyboardEndFrame toView:nil];
+    CGFloat bottomMargin = keyboardFrame.size.height;
+    self.photosCollectionView.contentInset = UIEdgeInsetsMake(0, 0, bottomMargin, 0);
+    NSLog(@"Keyboard did appear and bottom margin set to : %f", bottomMargin);
+    
+}
+- (void)keyboardDidDisappear:(NSNotification*) notification{
+   self.photosCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    
+    
+}
 
 @end
