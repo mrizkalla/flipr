@@ -14,6 +14,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "VideoCreator.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface CreateVideoViewController ()
 @property (weak, nonatomic) IBOutlet UIView *videoCanvasView;
@@ -91,8 +92,18 @@
     // Dismiss the keyboard if it is up
     [self.view endEditing:YES];
 
+    // Check that there is a title and if there isn't alert the dude
+    if (self.videoTitleTextField.text.length == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Video Title"
+                                                        message:@"You must set a title for your awesome creation."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
     // TODO - get the real video data and name - use a dummy for now
-//NSString *str=[[NSBundle mainBundle] pathForResource:@"IMG_0315" ofType:@"MOV"];
     NSData *videoData = [NSData dataWithContentsOfURL:[self.vc getVideoURL]];
 
     // Push to S3
@@ -186,7 +197,18 @@
     [userVideo setObject:user forKey:@"user"];
     userVideo[@"title"] = self.videoTitleTextField.text;
     userVideo[@"videoUrl"] = url;
-    userVideo[@"duration"] = @"1:34";
+    
+    // Get the Duration
+    NSURL *sourceMovieURL = [self.vc getVideoURL];
+    AVURLAsset *sourceAsset = [AVURLAsset URLAssetWithURL:sourceMovieURL options:nil];
+    CMTime duration = sourceAsset.duration;
+    NSDate* d = [[NSDate alloc] initWithTimeIntervalSince1970:duration.value/duration.timescale];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    userVideo[@"duration"] = [dateFormatter stringFromDate:d];
+    
+    // Send to parse
     [userVideo saveInBackground];
 
     
