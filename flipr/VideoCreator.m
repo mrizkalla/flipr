@@ -21,6 +21,8 @@
 
 - (CVPixelBufferRef) pixelBufferFromCGImage: (CGImageRef) image andSize:(CGSize)size;
 - (void)saveMovieToCameraRoll;
+- (CGImageRef)addText:(CGImageRef)img text:(NSString *)text1;
+
 
 @end
 
@@ -84,16 +86,18 @@
     //convert uiimage to CGImage.
     
     int frameCount = 0;
-    double numberOfSecondsPerFrame = 6;
+    double numberOfSecondsPerFrame = 3;
     NSUInteger fps = 30;
     double frameDuration = fps * numberOfSecondsPerFrame;
     
     CGSize size = CGSizeMake(640, 480);
+
     
     for(id object in self.selectedPhotos) {
         NSURL *urlStr;
         NSString *photoText = @"";
         CGImageRef imref = Nil;
+        
         if([object isKindOfClass:[FlickrPhoto class]]) {
             FlickrPhoto *myFp = object;
             urlStr = [NSURL URLWithString:myFp.photoURL];
@@ -119,8 +123,14 @@
         }
         
         //CGImageRef imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
-        
-        buffer = [self pixelBufferFromCGImage:imref andSize:size];
+        // Put the caption on the image
+        if (photoText.length != 0) {
+            CGImageRef imref2 = [self addText:imref text:photoText];
+            buffer = [self pixelBufferFromCGImage:imref2 andSize:size];
+        } else {
+            buffer = [self pixelBufferFromCGImage:imref andSize:size];
+        }
+
         
         BOOL append_ok = NO;
         int j = 0;
@@ -208,7 +218,7 @@
      }
      */
     
-    [NSThread sleepForTimeInterval:0.1];
+    [NSThread sleepForTimeInterval:1.0];
     
     //AVAssetExportSession to export the video
     /*    AVAssetExportSession* _assetExport = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
@@ -251,6 +261,24 @@
     
     
     
+}
+
+-(CGImageRef)addText:(CGImageRef)img text:(NSString *)text1{
+    
+    UIImage* image = [[UIImage alloc] initWithCGImage:img];
+    
+    UIFont *font = [UIFont boldSystemFontOfSize:14];
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)];
+    CGRect rect = CGRectMake(20, image.size.height - 30, image.size.width, image.size.height);
+    [text1 drawInRect:CGRectIntegral(rect) withAttributes:@{NSFontAttributeName:font,
+                                                            NSForegroundColorAttributeName:[UIColor whiteColor]
+                                                            }];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    return [newImage CGImage];
 }
 
 
