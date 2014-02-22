@@ -174,32 +174,39 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thi is a title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfb-mr-2vj">
-                                            <rect key="frame" x="20" y="10" width="244" height="29"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfb-mr-2vj">
+                                            <rect key="frame" x="20" y="10" width="267" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAY-wl-srL">
-                                            <rect key="frame" x="20" y="39" width="247" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:01:01" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAY-wl-srL">
+                                            <rect key="frame" x="20" y="39" width="74" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="JNT-NW-y6m"/>
-                                                <constraint firstAttribute="width" constant="247" id="jnZ-mZ-SiC"/>
+                                                <constraint firstAttribute="height" constant="20" id="JNT-NW-y6m"/>
+                                                <constraint firstAttribute="width" constant="74" id="jnZ-mZ-SiC"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Created on: Sat, Dec 20, '14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqe-lR-vOJ">
+                                            <rect key="frame" x="118" y="39" width="169" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="PAY-wl-srL" firstAttribute="leading" secondItem="zfb-mr-2vj" secondAttribute="leading" id="FWT-hG-gHc"/>
                                         <constraint firstItem="PAY-wl-srL" firstAttribute="top" secondItem="zfb-mr-2vj" secondAttribute="bottom" id="fjm-ZM-1Vc"/>
-                                        <constraint firstAttribute="trailing" secondItem="zfb-mr-2vj" secondAttribute="trailing" constant="23" id="qEe-Te-co8"/>
+                                        <constraint firstAttribute="trailing" secondItem="zfb-mr-2vj" secondAttribute="trailing" id="qEe-Te-co8"/>
                                         <constraint firstItem="zfb-mr-2vj" firstAttribute="top" secondItem="W1U-Ll-CQ1" secondAttribute="top" constant="10" id="s5Q-wT-RWm"/>
                                         <constraint firstItem="zfb-mr-2vj" firstAttribute="leading" secondItem="W1U-Ll-CQ1" secondAttribute="leading" constant="20" symbolic="YES" id="tyE-eg-rMB"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="createDateLabel" destination="Vqe-lR-vOJ" id="D7V-9P-3sZ"/>
                                     <outlet property="durationLabel" destination="PAY-wl-srL" id="lEa-5x-8y9"/>
                                     <outlet property="titleLabel" destination="zfb-mr-2vj" id="Z3F-Ry-Zpb"/>
                                 </connections>

@@ -74,6 +74,10 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
     // Configure the cell to show todo item with a priority at the bottom
     cell.titleLabel.text = [object objectForKey:@"title"];
     cell.durationLabel.text = [object objectForKey:@"duration"];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEE, MMM d, ''yy"];
+    cell.createDateLabel.text = [NSString stringWithFormat:@"Created at: %@", [dateFormatter stringFromDate:object.createdAt]];
 
     return cell;
 }
