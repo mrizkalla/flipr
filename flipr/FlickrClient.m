@@ -13,6 +13,7 @@
 #define Flickr_BASE_URL [NSURL URLWithString:@"http://api.flickr.com/services/"]
 #define Flickr_CONSUMER_KEY @"4bd736859f80395fc05acdf10abb3583"
 #define Flickr_CONSUMER_SECRET @"82b3805206d7dd8a"
+#define Flickr_UPLOAD_URL [NSURL URLWithString:@"http://up.flickr.com/services/"]
 
 
 
@@ -62,16 +63,29 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
     
 }
 
-#pragma mark - Statuses API
+#pragma mark - Flickr Photo and Video APIs
 - (void)getFlickrPhotosWithCount:(int)count success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
      NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"api_key": Flickr_CONSUMER_KEY}];
     [params setObject:@"json" forKey:@"format"];
     [params setObject:@"1" forKey:@"nojsoncallback"];
     [params setObject:@"me" forKey:@"user_id"];
+    [params setObject:@"photos" forKey:@"media"];
     
     NSString *url = [NSString stringWithFormat:@"rest/?method=flickr.photos.search"];
     
     [self getPath:url parameters:params success:success failure:failure];
+}
+- (void)uploadFlickrPhotoWithFile:(NSURL *)file title:(NSString *)title success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
+    
+    [self changeBaseUrl:Flickr_UPLOAD_URL];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"title": title}];
+   // [params setObject:file forKey:@"photo"];
+    [params setObject:@"file:///Users/bpriya/Pictures/babyElephant.jpg" forKey:@"photo"];
+    NSString *postString = [NSString stringWithFormat:@"upload/"];
+    
+    [self postPath:postString parameters:params success:success failure:failure];
+    
+    [self changeBaseUrl:Flickr_BASE_URL];
 }
 
 #pragma mark - Private methods

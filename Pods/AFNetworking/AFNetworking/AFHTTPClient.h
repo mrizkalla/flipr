@@ -446,6 +446,10 @@ typedef enum {
        parameters:(NSDictionary *)parameters
           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+//Change base url for upload
+-(void) changeBaseUrl:(NSURL *)url;
+
 @end
 
 ///----------------
@@ -637,5 +641,7 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
  */
 - (void)throttleBandwidthWithPacketSize:(NSUInteger)numberOfBytes
                                   delay:(NSTimeInterval)delay;
+
+
 
 @end

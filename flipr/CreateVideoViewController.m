@@ -15,6 +15,8 @@
 #import "VideoCreator.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
+#import <MessageUI/MessageUI.h>
+#import <AddressBook/AddressBook.h>
 
 @interface CreateVideoViewController ()
 @property (weak, nonatomic) IBOutlet UIView *videoCanvasView;
@@ -24,6 +26,13 @@
 @property (nonatomic, strong) VideoCreator *vc;
 @property (nonatomic, strong) NSString *uniqueKey;
 @property (nonatomic, strong) MPMoviePlayerController *player;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+- (IBAction)onShare:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *emailButton;
+- (IBAction)onEmail:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *uploadLabel;
+
+@property (nonatomic, strong) NSString *parseURL;
 
 - (IBAction)onDoneButton:(id)sender;
 - (void)getVideoUrl;
@@ -78,6 +87,13 @@
             // Configure the movie player controller
         });
     });
+    
+    //Set all the share options to hidden
+    self.shareButton.hidden = YES;
+    self.uploadLabel.hidden = YES;
+    self.emailButton.hidden = YES;
+    
+
 
 }
 
@@ -86,6 +102,100 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark Sharing options
+- (IBAction)onShare:(id)sender {
+    NSLog(@"The video file is :%@",[self.vc getVideoURL]);
+    
+    [[FlickrClient instance] uploadFlickrPhotoWithFile:[self.vc getVideoURL] title:self.videoTitleTextField.text success:^(AFHTTPRequestOperation *operation, id response) {
+        
+        id results = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+       // id photos = [[ results objectForKey:@"photos"] objectForKey:@"photo"];
+        NSLog(@"Upload response: %@", response);
+      
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        // Do nothing
+        NSLog(@"Flickr video failed to upload");
+    }];
+
+}
+#pragma mark Email methods
+- (IBAction)onEmail:(id)sender {
+    
+    //Getting user's email address in this step:
+    //NSString *userEmailAddress = @"";
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(nil,nil);
+ 
+   
+    
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+	picker.mailComposeDelegate = self;
+	
+	[picker setSubject:@"Flipr Video!"];
+	
+	// Set up recipients
+    /*
+	NSArray *toRecipients = [NSArray arrayWithObject:@"first@example.com"];
+	NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
+	NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"];
+	
+	[picker setToRecipients:toRecipients];
+	[picker setCcRecipients:ccRecipients];
+	[picker setBccRecipients:bccRecipients];*/
+
+	// Fill out the email body text
+	NSString *emailBody = [NSString stringWithFormat:@"Look at this cool video by flipr :%@",self.parseURL];
+	[picker setMessageBody:emailBody isHTML:NO];
+	
+	[self presentViewController:picker animated:YES completion:NULL];
+
+}
+#pragma mark - EmailCompose Delegate Methods
+
+// -------------------------------------------------------------------------------
+//	mailComposeController:didFinishWithResult:
+//  Dismisses the email composition interface when users tap Cancel or Send.
+//  Proceeds to update the message field with the result of the operation.
+// -------------------------------------------------------------------------------
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+	
+	// Notifies users about errors associated with the interface
+     NSString *message = [NSString stringWithFormat:@""];
+	switch (result)
+	{
+           
+		case MFMailComposeResultCancelled:
+			message = @"Result: Mail sending canceled";
+          
+			break;
+		case MFMailComposeResultSaved:
+			message= @"Result: Mail saved";
+			break;
+		case MFMailComposeResultSent:
+			message = @"Result: Mail sent";
+			break;
+		case MFMailComposeResultFailed:
+			message = @"Result: Mail sending failed";
+			break;
+		default:
+			message = @"Result: Mail not sent";
+			break;
+	}
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email Status"
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    
+	[self dismissViewControllerAnimated:YES completion:NULL];
+    [alert show];
+    [self performSegueWithIdentifier:@"createToVideoListSegue" sender:nil];
+}
+
+
 
 - (IBAction)onDoneButton:(id)sender
 {
@@ -117,6 +227,7 @@
     
     // Start spinning the progress bar
     [DejalBezelActivityView activityViewForView:self.navigationController.navigationBar.superview withLabel:@"Processing..."].showNetworkActivityIndicator = YES;;
+  
     
 }
 
@@ -179,6 +290,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 // Display the URL in Safari
                 [self saveVideoToParse:[url absoluteString]];
+                self.parseURL = [url absoluteString];
             });
         }
         
@@ -215,8 +327,12 @@
     // Stop spinning the progress bar
     [DejalBezelActivityView removeViewAnimated:YES];
     
+    self.shareButton.hidden = NO;
+    self.uploadLabel.hidden = NO;
+    self.emailButton.hidden = NO;
+    
     // Go to the video list
-    [self performSegueWithIdentifier:@"createToVideoListSegue" sender:nil];
+  //  [self performSegueWithIdentifier:@"createToVideoListSegue" sender:nil];
   
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="GUy-ea-6pg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="GUy-ea-6pg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Select Photos View Controller-->
@@ -78,21 +78,8 @@
                                 <rect key="frame" x="0.0" y="208" width="320" height="335"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRg-MO-4nQ">
-                                        <rect key="frame" x="9" y="72" width="303" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.08851907674966597" green="0.76061480978260865" blue="0.15759847522762971" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="37" id="te3-kI-ZAH"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
-                                        <state key="normal" title="Share">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKD-7f-AtU">
-                                        <rect key="frame" x="9" y="12" width="303" height="52"/>
+                                        <rect key="frame" x="9" y="12" width="302" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Give your video a title!" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hNf-XQ-6J8">
@@ -108,17 +95,57 @@
                                             <constraint firstAttribute="height" constant="52" id="G5Z-Wr-O6a"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmE-5W-pIM">
+                                        <rect key="frame" x="185" y="104" width="174" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Share" image="FlickrIcon">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onShare:" destination="2TF-iT-5dr" eventType="touchDown" id="ghB-eS-Ytu"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload to Flickr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie8-QS-Uqb">
+                                        <rect key="frame" x="20" y="142" width="172" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="172" id="NyZ-kH-ulC"/>
+                                            <constraint firstAttribute="height" constant="21" id="ZbY-Te-AEI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                        <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uq9-8a-wT5">
+                                        <rect key="frame" x="20" y="72" width="251" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Hzi-lf-Rud"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                        <state key="normal" title="Email">
+                                            <color key="titleColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="0.80642666279999997" green="0.89833490110000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onEmail:" destination="2TF-iT-5dr" eventType="touchDown" id="7ZX-b2-aLA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.69779929540507468" green="0.63380135046716912" blue="0.71641194820404053" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="CmE-5W-pIM" firstAttribute="leading" secondItem="gre-Ij-oNh" secondAttribute="leading" constant="185" id="33Y-L4-q5s"/>
+                                    <constraint firstItem="Uq9-8a-wT5" firstAttribute="leading" secondItem="gre-Ij-oNh" secondAttribute="leading" constant="20" symbolic="YES" id="3yC-KO-Mff"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uq9-8a-wT5" secondAttribute="trailing" constant="48" id="ECd-bH-k9K"/>
+                                    <constraint firstItem="Uq9-8a-wT5" firstAttribute="top" secondItem="ZKD-7f-AtU" secondAttribute="bottom" constant="8" symbolic="YES" id="HJY-eC-9wq"/>
                                     <constraint firstItem="ZKD-7f-AtU" firstAttribute="top" secondItem="gre-Ij-oNh" secondAttribute="top" constant="12" id="HxH-D3-ZhA"/>
+                                    <constraint firstAttribute="trailing" secondItem="CmE-5W-pIM" secondAttribute="trailing" constant="-40" id="K7b-ML-E4a"/>
+                                    <constraint firstItem="Ie8-QS-Uqb" firstAttribute="top" secondItem="Uq9-8a-wT5" secondAttribute="bottom" constant="40" id="LOL-Ci-5IJ"/>
                                     <constraint firstAttribute="trailing" secondItem="ZKD-7f-AtU" secondAttribute="trailing" constant="8" id="aWU-KB-Yc4"/>
-                                    <constraint firstItem="ZKD-7f-AtU" firstAttribute="leading" secondItem="dRg-MO-4nQ" secondAttribute="leading" id="eVh-DN-j4K"/>
-                                    <constraint firstItem="ZKD-7f-AtU" firstAttribute="trailing" secondItem="dRg-MO-4nQ" secondAttribute="trailing" id="hkI-PF-ucd"/>
-                                    <constraint firstItem="dRg-MO-4nQ" firstAttribute="top" secondItem="ZKD-7f-AtU" secondAttribute="bottom" constant="8" symbolic="YES" id="hqy-s6-boA"/>
+                                    <constraint firstAttribute="bottom" secondItem="Uq9-8a-wT5" secondAttribute="bottom" constant="233" id="kkI-gB-rfN"/>
                                     <constraint firstItem="ZKD-7f-AtU" firstAttribute="leading" secondItem="gre-Ij-oNh" secondAttribute="leading" constant="9" id="ovt-dj-461"/>
+                                    <constraint firstItem="Ie8-QS-Uqb" firstAttribute="leading" secondItem="Uq9-8a-wT5" secondAttribute="leading" id="pYs-Xf-IYe"/>
                                     <constraint firstItem="ZKD-7f-AtU" firstAttribute="centerX" secondItem="gre-Ij-oNh" secondAttribute="centerX" id="sKg-rm-1Pg"/>
-                                    <constraint firstAttribute="bottom" secondItem="dRg-MO-4nQ" secondAttribute="bottom" constant="226" id="tcH-Js-pWU"/>
+                                    <constraint firstItem="CmE-5W-pIM" firstAttribute="top" secondItem="Uq9-8a-wT5" secondAttribute="bottom" constant="2" id="wfS-h3-7Hb"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IY7-2U-ZWV">
@@ -149,6 +176,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emailButton" destination="Uq9-8a-wT5" id="lrx-ty-yxO"/>
+                        <outlet property="shareButton" destination="CmE-5W-pIM" id="UgJ-4e-Fej"/>
+                        <outlet property="uploadLabel" destination="Ie8-QS-Uqb" id="59b-n2-ITq"/>
                         <outlet property="videoCanvasView" destination="IY7-2U-ZWV" id="Ygf-7n-O4e"/>
                         <outlet property="videoTitleTextField" destination="hNf-XQ-6J8" id="Amv-hv-DUy"/>
                         <segue destination="AfQ-FN-28K" kind="push" identifier="createToVideoListSegue" id="gva-CI-UOm"/>
@@ -251,6 +281,9 @@
             <point key="canvasLocation" x="-737" y="-246"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FlickrIcon" width="128" height="128"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

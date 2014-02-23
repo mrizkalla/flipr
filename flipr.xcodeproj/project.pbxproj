@@ -14,6 +14,8 @@
 		21BC8541189DB8800042A6CD /* RestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC8540189DB8800042A6CD /* RestObject.m */; };
 		21BC8544189DB8980042A6CD /* FlickrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC8543189DB8980042A6CD /* FlickrUser.m */; };
 		21BC854B189DBB730042A6CD /* NSDictionary+CPAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */; };
+		21C70B8718B9AF8E00F0186A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C70B8618B9AF8E00F0186A /* AddressBook.framework */; };
+		21C70B8918B9B22D00F0186A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C70B8818B9B22D00F0186A /* AddressBookUI.framework */; };
 		21C97641189F04FA0096620D /* FlickrCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C97640189F04FA0096620D /* FlickrCell.m */; };
 		21C97643189F051E0096620D /* FlickrCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C97642189F051E0096620D /* FlickrCell.xib */; };
 		21C97646189F06920096620D /* FlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C97645189F06920096620D /* FlickrPhoto.m */; };
@@ -77,6 +79,8 @@
 		21BC8549189DBB730042A6CD /* NSDictionary+CPAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+CPAdditions.h"; path = "flipr/NSDictionary+CPAdditions.h"; sourceTree = "<group>"; };
 		21BC854A189DBB730042A6CD /* NSDictionary+CPAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+CPAdditions.m"; path = "flipr/NSDictionary+CPAdditions.m"; sourceTree = "<group>"; };
 		21BC854C189DBC360042A6CD /* FlickrCommons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrCommons.h; sourceTree = "<group>"; };
+		21C70B8618B9AF8E00F0186A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		21C70B8818B9B22D00F0186A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		21C9763F189F04FA0096620D /* FlickrCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlickrCell.h; path = ../FlickrCell.h; sourceTree = "<group>"; };
 		21C97640189F04FA0096620D /* FlickrCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlickrCell.m; path = ../FlickrCell.m; sourceTree = "<group>"; };
 		21C97642189F051E0096620D /* FlickrCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FlickrCell.xib; path = ../FlickrCell.xib; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C70B8918B9B22D00F0186A /* AddressBookUI.framework in Frameworks */,
+				21C70B8718B9AF8E00F0186A /* AddressBook.framework in Frameworks */,
 				A5C2A53718AA09C60006FB1D /* AVFoundation.framework in Frameworks */,
 				217B314818A6C4EB00D44D47 /* AssetsLibrary.framework in Frameworks */,
 				A516FC57189C157000164E5A /* AWSRuntime.framework in Frameworks */,
@@ -223,6 +229,8 @@
 		A591FAA11889C9800096EBE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21C70B8818B9B22D00F0186A /* AddressBookUI.framework */,
+				21C70B8618B9AF8E00F0186A /* AddressBook.framework */,
 				A5C2A53618AA09C60006FB1D /* AVFoundation.framework */,
 				217B314718A6C4EB00D44D47 /* AssetsLibrary.framework */,
 				A516FC55189C157000164E5A /* AWSRuntime.framework */,

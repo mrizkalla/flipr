@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <AWSS3/AWSS3.h>
+#import <MessageUI/MessageUI.h>
 
-@interface CreateVideoViewController : UIViewController <AmazonServiceRequestDelegate>
+@interface CreateVideoViewController : UIViewController <AmazonServiceRequestDelegate,MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *selectedPhotos;
 
