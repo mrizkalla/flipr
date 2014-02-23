@@ -10,7 +10,7 @@
 #import <AWSS3/AWSS3.h>
 #import <MessageUI/MessageUI.h>
 
-@interface CreateVideoViewController : UIViewController <AmazonServiceRequestDelegate,MFMailComposeViewControllerDelegate>
+@interface CreateVideoViewController : UIViewController <AmazonServiceRequestDelegate>
 
 @property (nonatomic, strong) NSMutableArray *selectedPhotos;
 

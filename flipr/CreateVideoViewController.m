@@ -28,9 +28,15 @@
 @property (nonatomic, strong) MPMoviePlayerController *player;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 - (IBAction)onShare:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *exitButton;
+
+- (IBAction)onExit:(id)sender;
+
+/*
 @property (weak, nonatomic) IBOutlet UIButton *emailButton;
 - (IBAction)onEmail:(id)sender;
-@property (weak, nonatomic) IBOutlet UILabel *uploadLabel;
+@property (weak, nonatomic) IBOutlet UILabel *uploadLabel;*/
+
 
 @property (nonatomic, strong) NSString *parseURL;
 
@@ -90,9 +96,16 @@
     
     //Set all the share options to hidden
     self.shareButton.hidden = YES;
-    self.uploadLabel.hidden = YES;
-    self.emailButton.hidden = YES;
+    [self.shareButton setBackgroundColor:[UIColor redColor]];
+    [self.shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.shareButton.layer.cornerRadius = 5;
     
+    self.exitButton.hidden = NO;
+    self.exitButton.layer.cornerRadius = 5;
+    [self.exitButton setBackgroundColor:[UIColor greenColor]];
+    [self.exitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+  
 
 
 }
@@ -102,7 +115,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/* Feb 22 efforts dont know if I want to use these things now
 #pragma mark Sharing options
 - (IBAction)onShare:(id)sender {
     NSLog(@"The video file is :%@",[self.vc getVideoURL]);
@@ -135,14 +148,14 @@
 	[picker setSubject:@"Flipr Video!"];
 	
 	// Set up recipients
-    /*
-	NSArray *toRecipients = [NSArray arrayWithObject:@"first@example.com"];
-	NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
-	NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"];
+ 
+	//NSArray *toRecipients = [NSArray arrayWithObject:@"first@example.com"];
+	//NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
+	//NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"];
 	
-	[picker setToRecipients:toRecipients];
-	[picker setCcRecipients:ccRecipients];
-	[picker setBccRecipients:bccRecipients];*/
+	//[picker setToRecipients:toRecipients];
+	//[picker setCcRecipients:ccRecipients];
+	//[picker setBccRecipients:bccRecipients];
 
 	// Fill out the email body text
 	NSString *emailBody = [NSString stringWithFormat:@"Look at this cool video by flipr :%@",self.parseURL];
@@ -194,7 +207,34 @@
     [alert show];
     [self performSegueWithIdentifier:@"createToVideoListSegue" sender:nil];
 }
+*/
 
+#pragma mark Sharing options
+- (IBAction)onShare:(id)sender {
+    NSString *shareString = @"Look at this cool video I created on flipr";
+    NSURL *shareUrl = [NSURL URLWithString:self.parseURL];
+    
+    NSArray *activityItems = [NSArray arrayWithObjects:shareString,shareUrl, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+  
+    [activityViewController setExcludedActivityTypes:@[UIActivityTypeAirDrop, UIActivityTypeMessage,UIActivityTypePrint,UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeAddToReadingList]];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+    
+    [activityViewController setCompletionHandler:^(NSString *act, BOOL done)
+     {
+         NSString *ServiceMsg = nil;
+         if ( [act isEqualToString:UIActivityTypeMail] )           ServiceMsg = @"Mail sent!";
+         if ( [act isEqualToString:UIActivityTypePostToTwitter] )  ServiceMsg = @"Post on twitter, ok!";
+         if ( [act isEqualToString:UIActivityTypePostToFacebook] ) ServiceMsg = @"Post on facebook, ok!";
+         if ( done )
+         {
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ServiceMsg message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+             [alert show]   ;
+         }
+     }];
+}
 
 
 - (IBAction)onDoneButton:(id)sender
@@ -328,13 +368,16 @@
     [DejalBezelActivityView removeViewAnimated:YES];
     
     self.shareButton.hidden = NO;
-    self.uploadLabel.hidden = NO;
-    self.emailButton.hidden = NO;
     
     // Go to the video list
   //  [self performSegueWithIdentifier:@"createToVideoListSegue" sender:nil];
   
 }
 
+#pragma mark Exit button
 
+- (IBAction)onExit:(id)sender {
+    // Go to the video list
+    [self performSegueWithIdentifier:@"createToVideoListSegue" sender:nil];
+}
 @end
