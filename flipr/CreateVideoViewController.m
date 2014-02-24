@@ -359,6 +359,7 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
     userVideo[@"duration"] = [dateFormatter stringFromDate:d];
+    userVideo[@"S3uniqueKey"] = self.uniqueKey;
     
     // Send to parse
     [userVideo saveInBackground];

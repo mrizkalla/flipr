@@ -274,10 +274,10 @@
 				A5C2A53418AA04BE0006FB1D /* VideoCreator.m */,
 				A526102E1891B26A00C87CB2 /* LoginViewController.h */,
 				A526102F1891B26A00C87CB2 /* LoginViewController.m */,
-				A591FABA1889C9800096EBE9 /* Images.xcassets */,
-				A591FAA91889C9800096EBE9 /* Supporting Files */,
 				A5080905189ED32B009561FD /* VideoCell.h */,
 				A5080906189ED32B009561FD /* VideoCell.m */,
+				A591FABA1889C9800096EBE9 /* Images.xcassets */,
+				A591FAA91889C9800096EBE9 /* Supporting Files */,
 			);
 			path = flipr;
 			sourceTree = "<group>";

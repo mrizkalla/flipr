@@ -9,10 +9,13 @@
 #import "VideoTableViewController.h"
 #import "VideoCell.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import <AWSS3/AWSS3.h>
+#import <AWSRuntime/AWSRuntime.h>
 
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 
 @interface VideoTableViewController ()
+- (void) deleteVideo:(NSIndexPath *)indexPath;
 
 @end
 
@@ -93,7 +96,14 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 }
 
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
 
+        // Reove the video from S3 and Parse
+        [self deleteVideo:indexPath];
+        
+    }
+}
 
 #pragma mark - Private methods
 
@@ -114,6 +124,42 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
     
 }
  */
+
+- (void) deleteVideo:(NSIndexPath *)indexPath {
+    
+    PFObject *selectedObject = [self objectAtIndexPath:indexPath];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        // handle the case where there is no key (just remove the parse record)
+        if (selectedObject[@"S3uniqueKey"] != nil) {
+            
+            AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:@"AKIAJJH522J3C3GOD2VA"
+                                                             withSecretKey:@"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"];
+            s3.endpoint = [AmazonEndpoints s3Endpoint:US_WEST_2];
+            
+            S3DeleteObjectResponse *response = [s3 deleteObjectWithKey:selectedObject[@"S3uniqueKey"]
+                                                            withBucket:@"group13videos-akiajjh522j3c3god2va"];
+            
+            if ([response error]) {
+                return;
+            }
+        }
+        
+        // Remove the object from Parse
+        [selectedObject deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self loadObjects];
+                //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                //                 withRowAnimation:UITableViewRowAnimationFade];
+            });
+            
+        }];
+        
+    });
+}
 
 
 @end
