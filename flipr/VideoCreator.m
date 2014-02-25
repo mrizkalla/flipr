@@ -18,12 +18,11 @@
 @property (nonatomic, strong) AVAssetWriterInput* writerInput;
 @property (nonatomic, strong) AVAssetWriter *videoWriter;
 @property (nonatomic, strong) NSString *appFile;
-//@property (nonatomic, assign) CGImageRef coverPhotoRef;
 
 - (CVPixelBufferRef) pixelBufferFromCGImage: (CGImageRef) image andSize:(CGSize)size;
 - (void)saveMovieToCameraRoll;
 - (CGImageRef)addText:(CGImageRef)img text:(NSString *)text1;
-
+- (CGImageRef)resizeImage:(CGImageRef)img;
 
 @end
 
@@ -48,12 +47,27 @@
                                                                   error:&error];
         NSParameterAssert(self.videoWriter);
         
+/*        NSDictionary *codecSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       [NSNumber numberWithInteger:bitsPerSecond], AVVideoAverageBitRateKey,
+                                       @1,AVVideoMaxKeyFrameIntervalKey,
+                                       videoCleanApertureSettings, AVVideoCleanApertureKey,
+                                       //AVVideoScalingModeFit,AVVideoScalingModeKey,
+                                       videoAspectRatioSettings, AVVideoPixelAspectRatioKey,
+                                       nil];
+        
+        NSDictionary *videoCompressionSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                  AVVideoCodecH264, AVVideoCodecKey,
+                                                  codecSettings,AVVideoCompressionPropertiesKey,
+                                                  @320, AVVideoWidthKey,
+                                                  @320, AVVideoHeightKey,
+                                                  nil];
+*/
         
         NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
                                        AVVideoCodecH264, AVVideoCodecKey,
+                                       AVVideoScalingModeResizeAspect,AVVideoScalingModeKey,
                                        [NSNumber numberWithInt:640], AVVideoWidthKey,
                                        [NSNumber numberWithInt:480], AVVideoHeightKey,
-                                       //compressionProperties, AVVideoCompressionPropertiesKey,
                                        nil];
         self.writerInput = [AVAssetWriterInput
                             assetWriterInputWithMediaType:AVMediaTypeVideo
@@ -106,12 +120,7 @@
                 photoText = myFp.photoCaption;
             }
             NSLog(@"The url for flickr photo is :%@ and the caption is : %@",urlStr,photoText);
-            //imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
-            NSData *nsData = [NSData dataWithContentsOfURL:urlStr];
-            NSLog(@"nsData: %@", nsData);
-            
-            UIImage *image = [UIImage imageWithData: nsData];
-            imref = image.CGImage;
+            imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
             
         } else if([object isKindOfClass:[CameraPhoto class]]) {
             
@@ -128,23 +137,18 @@
             imref = [rep fullResolutionImage];
         }
         
-        //CGImageRef imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
+        // Resize the image to fit in 640x480
+        CGImageRef resized_imref = [self resizeImage:imref];
+        
+        
         // Put the caption on the image
-        CGImageRef imref2 = Nil;
-
         if (photoText.length != 0) {
-            imref2 = [self addText:imref text:photoText];
+            CGImageRef imref2 = [self addText:resized_imref text:photoText];
+            buffer = [self pixelBufferFromCGImage:imref2 andSize:size];
         } else {
-            imref2 = imref;
+            buffer = [self pixelBufferFromCGImage:resized_imref andSize:size];
         }
-        
-        buffer = [self pixelBufferFromCGImage:imref2 andSize:size];
-        
-//        // Save the cover photo for later use in TableVC
-//        if (frameCount == 0) {
-//            self.coverPhotoRef = imref2;
-//            NSLog(@"headPhoto!");
-//        }
+
         
         BOOL append_ok = NO;
         int j = 0;
@@ -277,14 +281,38 @@
     
 }
 
--(CGImageRef)addText:(CGImageRef)img text:(NSString *)text1{
+- (CGImageRef)resizeImage:(CGImageRef)img {
+    UIImage* image = [[UIImage alloc] initWithCGImage:img];
+    int newW = 0;
+    int newH = 0;
+    
+    if (image.size.width >= image.size.height) {
+        newW = 320;
+        newH = image.size.height * (320/image.size.width);
+    } else {
+        newH = 240;
+        newW = image.size.width * (240/image.size.height);
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(newW, newH), NO, 0.0);
+    [image drawInRect:CGRectMake(0,0,newW,newH)];
+
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    return [newImage CGImage];
+    
+}
+- (CGImageRef)addText:(CGImageRef)img text:(NSString *)text1{
     
     UIImage* image = [[UIImage alloc] initWithCGImage:img];
     
-    UIFont *font = [UIFont boldSystemFontOfSize:14];
+    UIFont *font = [UIFont boldSystemFontOfSize:36];
     UIGraphicsBeginImageContext(image.size);
+    NSLog(@"image size is %f x %f", image.size.width, image.size.height);
     [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)];
-    CGRect rect = CGRectMake(20, image.size.height - 30, image.size.width, image.size.height);
+    CGRect rect = CGRectMake(20, image.size.height - 60, image.size.width, 60);
     [text1 drawInRect:CGRectIntegral(rect) withAttributes:@{NSFontAttributeName:font,
                                                             NSForegroundColorAttributeName:[UIColor whiteColor]
                                                             }];
@@ -357,13 +385,4 @@
 - (NSURL *)getVideoURL {
     return [NSURL fileURLWithPath:self.appFile];
 }
-
-//- (CGImageRef)getCoverPhotoRef {
-////    UIImage *image = [UIImage imageNamed:@"flipper.jpeg"];
-////    CGImageRef ref = image.CGImage;
-////    return ref;
-//    
-//    return (self.coverPhotoRef);
-//}
-
 @end

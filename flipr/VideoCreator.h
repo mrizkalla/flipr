@@ -12,6 +12,5 @@
 
 - (void)createVideo:(NSArray *)imageArray;
 - (NSURL*)getVideoURL;
-- (CGImageRef)getCoverPhotoRef;
 
 @end
