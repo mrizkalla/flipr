@@ -72,8 +72,8 @@
         [self.vc createVideo:self.selectedPhotos];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Put the video up in the box now %@", [self.vc getVideoURL]);
-            self.player = [[MPMoviePlayerController alloc] initWithContentURL:[self.vc getVideoURL]];
+            NSLog(@"Put the video up in the box now %@", [self.vc getonlyVideoURL]);
+            self.player = [[MPMoviePlayerController alloc] initWithContentURL:[self.vc getonlyVideoURL]];
             self.player.movieSourceType = MPMovieSourceTypeFile;
 
             [self.player prepareToPlay];
@@ -366,7 +366,6 @@
     UIImage *image = [UIImage imageWithCGImage:cgRef];
     
     NSData *imageData = UIImageJPEGRepresentation(image, 0.05f);
-    NSLog(@"imageData: %@", imageData);
     
     PFFile *coverPhoto = [PFFile fileWithData:imageData];
     [userVideo setObject:coverPhoto forKey:@"coverPhoto"];

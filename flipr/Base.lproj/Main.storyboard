@@ -199,9 +199,12 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfb-mr-2vj">
-                                            <rect key="frame" x="5" y="162" width="267" height="29"/>
+                                            <rect key="frame" x="5" y="163" width="137" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="137" id="wmX-IU-XDZ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:01:01" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAY-wl-srL">
@@ -217,23 +220,24 @@
                                             <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created on: Sat, Dec 20, '14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqe-lR-vOJ">
-                                            <rect key="frame" x="-6" y="164" width="320" height="20"/>
+                                            <rect key="frame" x="176" y="163" width="138" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Vqe-lR-vOJ" firstAttribute="leading" secondItem="zfb-mr-2vj" secondAttribute="trailing" constant="34" id="8E9-cl-MC4"/>
                                         <constraint firstItem="7tv-ZA-vCr" firstAttribute="leading" secondItem="W1U-Ll-CQ1" secondAttribute="leading" id="Fub-Tu-1Ou"/>
-                                        <constraint firstItem="Vqe-lR-vOJ" firstAttribute="top" secondItem="7tv-ZA-vCr" secondAttribute="bottom" constant="4" id="RV6-vn-ajv"/>
-                                        <constraint firstItem="zfb-mr-2vj" firstAttribute="leading" secondItem="W1U-Ll-CQ1" secondAttribute="leading" constant="5" id="RbL-d5-ENx"/>
-                                        <constraint firstAttribute="trailing" secondItem="zfb-mr-2vj" secondAttribute="trailing" constant="48" id="UHJ-2U-UcR"/>
-                                        <constraint firstAttribute="bottom" secondItem="Vqe-lR-vOJ" secondAttribute="bottom" id="W0f-2F-ZQ7"/>
+                                        <constraint firstAttribute="bottom" secondItem="Vqe-lR-vOJ" secondAttribute="bottom" constant="1" id="HTw-SA-Xfa"/>
+                                        <constraint firstItem="Vqe-lR-vOJ" firstAttribute="top" secondItem="zfb-mr-2vj" secondAttribute="top" id="IZo-ti-vR3"/>
+                                        <constraint firstItem="zfb-mr-2vj" firstAttribute="top" secondItem="7tv-ZA-vCr" secondAttribute="bottom" constant="3" id="KyO-j6-4PQ"/>
+                                        <constraint firstItem="Vqe-lR-vOJ" firstAttribute="trailing" secondItem="PAY-wl-srL" secondAttribute="trailing" id="Ncz-tr-7J7"/>
                                         <constraint firstItem="7tv-ZA-vCr" firstAttribute="top" secondItem="W1U-Ll-CQ1" secondAttribute="top" id="awx-v5-pVg"/>
-                                        <constraint firstItem="zfb-mr-2vj" firstAttribute="top" secondItem="PAY-wl-srL" secondAttribute="bottom" constant="7" id="cPp-6I-VOn"/>
-                                        <constraint firstItem="Vqe-lR-vOJ" firstAttribute="trailing" secondItem="PAY-wl-srL" secondAttribute="trailing" id="ccN-1c-Gij"/>
-                                        <constraint firstItem="Vqe-lR-vOJ" firstAttribute="leading" secondItem="W1U-Ll-CQ1" secondAttribute="leading" constant="-6" id="e0L-yi-ivx"/>
-                                        <constraint firstItem="zfb-mr-2vj" firstAttribute="top" secondItem="7tv-ZA-vCr" secondAttribute="bottom" constant="2" id="hx8-FH-eCD"/>
+                                        <constraint firstItem="Vqe-lR-vOJ" firstAttribute="top" secondItem="PAY-wl-srL" secondAttribute="bottom" constant="8" symbolic="YES" id="bnB-1t-tn4"/>
+                                        <constraint firstItem="zfb-mr-2vj" firstAttribute="leading" secondItem="W1U-Ll-CQ1" secondAttribute="leading" constant="5" id="gMk-cf-52v"/>
+                                        <constraint firstItem="zfb-mr-2vj" firstAttribute="centerY" secondItem="Vqe-lR-vOJ" secondAttribute="centerY" id="gjc-LW-Ftm"/>
                                         <constraint firstAttribute="trailing" secondItem="PAY-wl-srL" secondAttribute="trailing" constant="6" id="kNb-x2-hKK"/>
                                         <constraint firstAttribute="trailing" secondItem="7tv-ZA-vCr" secondAttribute="trailing" id="wck-Lf-qBm"/>
                                     </constraints>

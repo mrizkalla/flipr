@@ -14,11 +14,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t7z-DZ-Yeh">
-                        <rect key="frame" x="7" y="35" width="467" height="229"/>
+                        <rect key="frame" x="7" y="8" width="467" height="213"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter your caption here" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xHc-S4-b3A">
-                        <rect key="frame" x="7" y="219" width="467" height="30"/>
+                        <rect key="frame" x="7" y="229" width="467" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -31,10 +31,10 @@
                 <constraint firstItem="t7z-DZ-Yeh" firstAttribute="leading" secondItem="cCk-CM-dQM" secondAttribute="leading" constant="7" id="0dn-LG-Hzg"/>
                 <constraint firstItem="xHc-S4-b3A" firstAttribute="leading" secondItem="t7z-DZ-Yeh" secondAttribute="leading" id="Cw5-ch-9IV"/>
                 <constraint firstItem="xHc-S4-b3A" firstAttribute="trailing" secondItem="t7z-DZ-Yeh" secondAttribute="trailing" id="Dsi-HQ-zCh"/>
-                <constraint firstItem="t7z-DZ-Yeh" firstAttribute="top" secondItem="cCk-CM-dQM" secondAttribute="top" constant="35" id="Tds-MX-6OI"/>
+                <constraint firstItem="t7z-DZ-Yeh" firstAttribute="top" secondItem="cCk-CM-dQM" secondAttribute="top" constant="8" id="Tds-MX-6OI"/>
                 <constraint firstItem="t7z-DZ-Yeh" firstAttribute="centerX" secondItem="cCk-CM-dQM" secondAttribute="centerX" id="V8d-n4-ATc"/>
-                <constraint firstAttribute="bottom" secondItem="t7z-DZ-Yeh" secondAttribute="bottom" constant="5" id="fVF-vt-Wo6"/>
-                <constraint firstAttribute="bottom" secondItem="xHc-S4-b3A" secondAttribute="bottom" constant="20" id="qKh-DL-xyM"/>
+                <constraint firstAttribute="bottom" secondItem="t7z-DZ-Yeh" secondAttribute="bottom" constant="48" id="fVF-vt-Wo6"/>
+                <constraint firstAttribute="bottom" secondItem="xHc-S4-b3A" secondAttribute="bottom" constant="10" id="qKh-DL-xyM"/>
             </constraints>
             <size key="customSize" width="480" height="269"/>
             <connections>
