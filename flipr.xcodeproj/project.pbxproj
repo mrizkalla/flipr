@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11F3603F342F42D5ADEC7FAB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C95DB1112134393978A29DE /* libPods.a */; };
+		21493DB618BC52CF00C69922 /* mysong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 21493DB518BC52CF00C69922 /* mysong.mp3 */; };
 		217B314818A6C4EB00D44D47 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217B314718A6C4EB00D44D47 /* AssetsLibrary.framework */; };
 		21A7E44F18B193BB0080C9C5 /* CameraPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7E44E18B193BB0080C9C5 /* CameraPhoto.m */; };
 		21BC853E189DB8220042A6CD /* FlickrClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC853D189DB8220042A6CD /* FlickrClient.m */; };
@@ -67,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		1C95DB1112134393978A29DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		21493DB518BC52CF00C69922 /* mysong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mysong.mp3; sourceTree = SOURCE_ROOT; };
 		217B314718A6C4EB00D44D47 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		21A7E44D18B193BB0080C9C5 /* CameraPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraPhoto.h; sourceTree = "<group>"; };
 		21A7E44E18B193BB0080C9C5 /* CameraPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraPhoto.m; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		A591FAA91889C9800096EBE9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				21493DB518BC52CF00C69922 /* mysong.mp3 */,
 				21BC854C189DBC360042A6CD /* FlickrCommons.h */,
 				A591FAAA1889C9800096EBE9 /* flipr-Info.plist */,
 				A591FAAB1889C9800096EBE9 /* InfoPlist.strings */,
@@ -393,6 +396,7 @@
 				21C97643189F051E0096620D /* FlickrCell.xib in Resources */,
 				A591FABB1889C9800096EBE9 /* Images.xcassets in Resources */,
 				A591FAAD1889C9800096EBE9 /* InfoPlist.strings in Resources */,
+				21493DB618BC52CF00C69922 /* mysong.mp3 in Resources */,
 				A591FAB61889C9800096EBE9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

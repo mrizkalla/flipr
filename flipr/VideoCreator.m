@@ -18,6 +18,8 @@
 @property (nonatomic, strong) AVAssetWriterInput* writerInput;
 @property (nonatomic, strong) AVAssetWriter *videoWriter;
 @property (nonatomic, strong) NSString *appFile;
+@property (nonatomic,strong) NSString *musicFile;
+@property (nonatomic,strong) NSString *movFile;
 
 - (CVPixelBufferRef) pixelBufferFromCGImage: (CGImageRef) image andSize:(CGSize)size;
 - (void)saveMovieToCameraRoll;
@@ -45,6 +47,14 @@
         self.videoWriter = [[AVAssetWriter alloc] initWithURL:
                                       [NSURL fileURLWithPath:self.appFile] fileType:AVFileTypeQuickTimeMovie
                                                                   error:&error];
+        // Start - Added for audio
+        self.movFile = [documentsDirectory stringByAppendingPathComponent:@"MyMovFile.mov"];
+        
+        if ([fileMgr removeItemAtPath:self.movFile error:&error] != YES)
+            NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+        
+        // End
+
         NSParameterAssert(self.videoWriter);
         
         
@@ -175,19 +185,28 @@
     }
     
     
+    
     //OK now add an audio file to move file
-    //    AVMutableComposition* mixComposition = [AVMutableComposition composition];
+    AVMutableComposition* mixComposition = [AVMutableComposition composition];
     
     //Get the saved audio song path to merge it in video
-    //NSURL *audio_inputFileUrl ;
-    //NSString *filePath = [self applicationDocumentsDirectory];
+    NSURL *audio_inputFileUrl ;
+    self.musicFile = [[NSBundle mainBundle] pathForResource:@"mysong" ofType:@"mp3"];
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+   // NSError *error = nil;
     //NSString *outputFilePath1 = [filePath stringByAppendingPathComponent:@"mySong.m4a"];
-    //audio_inputFileUrl = [[NSURL alloc]initFileURLWithPath:outputFilePath1];
+    audio_inputFileUrl = [[NSURL alloc]initFileURLWithPath:self.musicFile];
     
+    bool audioExists = [ fileMgr fileExistsAtPath:self.musicFile];
+    if(audioExists){
+         NSLog(@"Audio file %@ exists",self.musicFile);
+    }else{
+        NSLog(@"Audio file %@ does not exist",self.musicFile);
+    }
     // this is the video file that was just written above
-    //    NSURL    *video_inputFileUrl = [[NSURL alloc]initFileURLWithPath:appFile];
+    NSURL    *video_inputFileUrl = [[NSURL alloc]initFileURLWithPath:self.appFile];
     
-    //    [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:0.5];
     
     // create the final video output file as MOV file - may need to be MP4, but this works so far...
     //    NSString *outputFilePath = [documentsDirectory stringByAppendingPathComponent:@"Slideshow_video.mov"];
@@ -195,66 +214,75 @@
     
     //    if ([[NSFileManager defaultManager] fileExistsAtPath:outputFilePath])
     //        [[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:nil];
+     
     
     //AVURLAsset get video without audio
-    //    AVURLAsset* videoAsset = [[AVURLAsset alloc]initWithURL:video_inputFileUrl options:nil];
-    //    CMTimeRange video_timeRange = CMTimeRangeMake(kCMTimeZero,videoAsset.duration);
-    //    AVMutableCompositionTrack *a_compositionVideoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-    //    [a_compositionVideoTrack insertTimeRange:video_timeRange ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    AVURLAsset* videoAsset = [[AVURLAsset alloc]initWithURL:video_inputFileUrl options:nil];
+    CMTimeRange video_timeRange = CMTimeRangeMake(kCMTimeZero,videoAsset.duration);
+    AVMutableCompositionTrack *a_compositionVideoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    [a_compositionVideoTrack insertTimeRange:video_timeRange ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
     
-    //    [NSThread sleepForTimeInterval:3.0];
+    [NSThread sleepForTimeInterval:0.5];
     
     //If audio song merged
-    /* if (![self.appDelegate.musicFilePath isEqualToString:@"Not set"])
-     {
-     // *************************make sure all exception is off***********************
+    //if (![self.appDelegate.musicFilePath isEqualToString:@"Not set"])
+    if (![self.musicFile isEqualToString:@""])
+    {
+     
+     NSLog(@"Adding the audio to the video -step 1");
      AVURLAsset* audioAsset = [[AVURLAsset alloc]initWithURL:audio_inputFileUrl options:nil];
-     CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
+     CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, videoAsset.duration);
      AVMutableCompositionTrack *b_compositionAudioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
      
      if (![audioAsset tracksWithMediaType:AVMediaTypeAudio].count == 0) {
+         NSLog(@"Adding the audio to the video -step 2");
      [b_compositionAudioTrack insertTimeRange:audio_timeRange ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
      }
-     }
-     */
+    }
     
-    [NSThread sleepForTimeInterval:1.0];
+    
+    [NSThread sleepForTimeInterval:0.5];
+    
     
     //AVAssetExportSession to export the video
-    /*    AVAssetExportSession* _assetExport = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
-     _assetExport.outputFileType = AVFileTypeQuickTimeMovie;
-     _assetExport.outputURL = outputFileUrl;
+     AVAssetExportSession* assetExport = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+     assetExport.outputFileType = AVFileTypeQuickTimeMovie;
+     NSURL    *outputFileUrl = [NSURL fileURLWithPath:self.movFile];
+     assetExport.outputURL = outputFileUrl;
      
-     [_assetExport exportAsynchronouslyWithCompletionHandler:^(void){
-     switch (_assetExport.status) {
-     case AVAssetExportSessionStatusCompleted:
-     //#if !TARGET_IPHONE_SIMULATOR
-     [self saveMovieToCameraRoll:outputFileUrl];
-     //#endif
-     //[self RemoveSlideshowImagesInTemp];
-     //[self removeAudioFileFromDocumentsdirectory:outputFilePath1];
-     //[self removeAudioFileFromDocumentsdirectory:videoOutputPath];
-     NSLog(@"AVAssetExportSessionStatusCompleted");
-     dispatch_async(dispatch_get_main_queue(), ^{
-     if (alrtCreatingVideo && alrtCreatingVideo.visible) {
-     [alrtCreatingVideo dismissWithClickedButtonIndex:alrtCreatingVideo.firstOtherButtonIndex animated:YES];
-     [databaseObj isVideoCreated:appDelegate.pro_id];
-     [self performSelector:@selector(successAlertView) withObject:nil afterDelay:0.0];
-     }
-     });
-     break;
-     case AVAssetExportSessionStatusFailed:
-     NSLog(@"Failed:%@",_assetExport.error);
-     break;
-     case AVAssetExportSessionStatusCancelled:
-     NSLog(@"Canceled:%@",_assetExport.error);
-     break;
-     default:
-     break;
+     [assetExport exportAsynchronouslyWithCompletionHandler:^(void){
+      
+     
+     
+     switch (assetExport.status) {
+         case AVAssetExportSessionStatusCompleted:
+         //#if !TARGET_IPHONE_SIMULATOR
+         //[self saveMo   vieToCameraRoll:outputFileUrl];
+         //#endif
+         //[self RemoveSlideshowImagesInTemp];
+         //[self removeAudioFileFromDocumentsdirectory:outputFilePath1];
+         //[self removeAudioFileFromDocumentsdirectory:videoOutputPath];
+         NSLog(@"AVAssetExportSessionStatusCompleted");
+         dispatch_async(dispatch_get_main_queue(), ^{
+         // if (alrtCreatingVideo && alrtCreatingVideo.visible) {
+         //[alrtCreatingVideo dismissWithClickedButtonIndex:alrtCreatingVideo.firstOtherButtonIndex animated:YES];
+         //[databaseObj isVideoCreated:appDelegate.pro_id];
+         //[self performSelector:@selector(successAlertView) withObject:nil afterDelay:0.0];
+         //}
+         });
+         break;
+         case AVAssetExportSessionStatusFailed:
+         NSLog(@"Failed:%@",assetExport.error);
+         break;
+         case AVAssetExportSessionStatusCancelled:
+         NSLog(@"Canceled:%@",assetExport.error);
+         break;
+         default:
+         break;
      }
      }];
-     */
-
+    
+    
 
     // [self saveMovieToCameraRoll];
     
@@ -322,7 +350,7 @@
 - (void)saveMovieToCameraRoll
 {
 
-    NSURL *outputURL = [NSURL fileURLWithPath:self.appFile];
+    NSURL *outputURL = [NSURL fileURLWithPath:self.movFile];
     
     // save the movie to the camera roll
 	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
@@ -341,6 +369,12 @@
 }
 
 - (NSURL *)getVideoURL {
+//return [NSURL fileURLWithPath:self.appFile];
+    return [NSURL fileURLWithPath:self.movFile];
+}
+
+- (NSURL *)getonlyVideoURL{
     return [NSURL fileURLWithPath:self.appFile];
+    
 }
 @end

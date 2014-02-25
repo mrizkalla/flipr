@@ -12,5 +12,6 @@
 
 - (void)createVideo:(NSArray *)imageArray;
 - (NSURL*)getVideoURL;
+- (NSURL*)getonlyVideoURL;
 
 @end
