@@ -18,7 +18,6 @@
 @property (nonatomic, strong) AVAssetWriterInput* writerInput;
 @property (nonatomic, strong) AVAssetWriter *videoWriter;
 @property (nonatomic, strong) NSString *appFile;
-//@property (nonatomic, assign) CGImageRef coverPhotoRef;
 
 - (CVPixelBufferRef) pixelBufferFromCGImage: (CGImageRef) image andSize:(CGSize)size;
 - (void)saveMovieToCameraRoll;
@@ -108,7 +107,6 @@
             NSLog(@"The url for flickr photo is :%@ and the caption is : %@",urlStr,photoText);
             //imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
             NSData *nsData = [NSData dataWithContentsOfURL:urlStr];
-            NSLog(@"nsData: %@", nsData);
             
             UIImage *image = [UIImage imageWithData: nsData];
             imref = image.CGImage;
@@ -126,25 +124,14 @@
             NSLog(@"The url for camera photo is :%@ and the caption is :%@",urlStr,photoText);
             ALAssetRepresentation *rep = [myCameraPhoto defaultRepresentation];
             imref = [rep fullResolutionImage];
-        }
-        
-        //CGImageRef imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
+        }            
         // Put the caption on the image
-        CGImageRef imref2 = Nil;
-
         if (photoText.length != 0) {
-            imref2 = [self addText:imref text:photoText];
+            CGImageRef imref2 = [self addText:imref text:photoText];
+            buffer = [self pixelBufferFromCGImage:imref2 andSize:size];
         } else {
-            imref2 = imref;
+            buffer = [self pixelBufferFromCGImage:imref andSize:size];
         }
-        
-        buffer = [self pixelBufferFromCGImage:imref2 andSize:size];
-        
-//        // Save the cover photo for later use in TableVC
-//        if (frameCount == 0) {
-//            self.coverPhotoRef = imref2;
-//            NSLog(@"headPhoto!");
-//        }
         
         BOOL append_ok = NO;
         int j = 0;
@@ -280,11 +267,11 @@
 -(CGImageRef)addText:(CGImageRef)img text:(NSString *)text1{
     
     UIImage* image = [[UIImage alloc] initWithCGImage:img];
-    
     UIFont *font = [UIFont boldSystemFontOfSize:14];
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)];
     CGRect rect = CGRectMake(20, image.size.height - 30, image.size.width, image.size.height);
+
     [text1 drawInRect:CGRectIntegral(rect) withAttributes:@{NSFontAttributeName:font,
                                                             NSForegroundColorAttributeName:[UIColor whiteColor]
                                                             }];
@@ -357,13 +344,5 @@
 - (NSURL *)getVideoURL {
     return [NSURL fileURLWithPath:self.appFile];
 }
-
-//- (CGImageRef)getCoverPhotoRef {
-////    UIImage *image = [UIImage imageNamed:@"flipper.jpeg"];
-////    CGImageRef ref = image.CGImage;
-////    return ref;
-//    
-//    return (self.coverPhotoRef);
-//}
 
 @end
