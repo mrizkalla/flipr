@@ -115,7 +115,11 @@
                 photoText = myFp.photoCaption;
             }
             NSLog(@"The url for flickr photo is :%@ and the caption is : %@",urlStr,photoText);
-            imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
+            //imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
+            NSData *nsData = [NSData dataWithContentsOfURL:urlStr];
+            
+            UIImage *image = [UIImage imageWithData: nsData];
+            imref = image.CGImage;
             
         } else if([object isKindOfClass:[CameraPhoto class]]) {
             
@@ -130,9 +134,7 @@
             NSLog(@"The url for camera photo is :%@ and the caption is :%@",urlStr,photoText);
             ALAssetRepresentation *rep = [myCameraPhoto defaultRepresentation];
             imref = [rep fullResolutionImage];
-        }
-        
-        //CGImageRef imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
+        }            
         // Put the caption on the image
         if (photoText.length != 0) {
             CGImageRef imref2 = [self addText:imref text:photoText];
@@ -140,7 +142,6 @@
         } else {
             buffer = [self pixelBufferFromCGImage:imref andSize:size];
         }
-
         
         BOOL append_ok = NO;
         int j = 0;
@@ -294,11 +295,11 @@
 -(CGImageRef)addText:(CGImageRef)img text:(NSString *)text1{
     
     UIImage* image = [[UIImage alloc] initWithCGImage:img];
-    
     UIFont *font = [UIFont boldSystemFontOfSize:14];
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)];
     CGRect rect = CGRectMake(20, image.size.height - 30, image.size.width, image.size.height);
+
     [text1 drawInRect:CGRectIntegral(rect) withAttributes:@{NSFontAttributeName:font,
                                                             NSForegroundColorAttributeName:[UIColor whiteColor]
                                                             }];
@@ -377,4 +378,5 @@
     return [NSURL fileURLWithPath:self.appFile];
     
 }
+
 @end
