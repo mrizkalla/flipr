@@ -19,6 +19,8 @@
 		21C97641189F04FA0096620D /* FlickrCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C97640189F04FA0096620D /* FlickrCell.m */; };
 		21C97643189F051E0096620D /* FlickrCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C97642189F051E0096620D /* FlickrCell.xib */; };
 		21C97646189F06920096620D /* FlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C97645189F06920096620D /* FlickrPhoto.m */; };
+		9F40A4F518BC32AA0061FC0E /* tree.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9F40A4F418BC32AA0061FC0E /* tree.jpeg */; };
+		9F40A4F718BC46DB0061FC0E /* flipper.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9F40A4F618BC46DB0061FC0E /* flipper.jpeg */; };
 		9FD1D7851899B7810076CC94 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7841899B7810076CC94 /* Parse.framework */; };
 		9FD1D7871899B7C20076CC94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */; };
 		9FD1D7891899B7D00076CC94 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1D7881899B7D00076CC94 /* CFNetwork.framework */; };
@@ -87,6 +89,8 @@
 		21C97644189F06920096620D /* FlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhoto.h; sourceTree = "<group>"; };
 		21C97645189F06920096620D /* FlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhoto.m; sourceTree = "<group>"; };
 		812BDD3AD3CF4598BC5E0BC1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		9F40A4F418BC32AA0061FC0E /* tree.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tree.jpeg; sourceTree = "<group>"; };
+		9F40A4F618BC46DB0061FC0E /* flipper.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flipper.jpeg; sourceTree = "<group>"; };
 		9FD1D7841899B7810076CC94 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9FD1D7861899B7C20076CC94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9FD1D7881899B7D00076CC94 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -272,11 +276,13 @@
 				A52610321891B2A000C87CB2 /* VideoTableViewController.m */,
 				A5C2A53318AA04BE0006FB1D /* VideoCreator.h */,
 				A5C2A53418AA04BE0006FB1D /* VideoCreator.m */,
+				9F40A4F618BC46DB0061FC0E /* flipper.jpeg */,
 				A526102E1891B26A00C87CB2 /* LoginViewController.h */,
 				A526102F1891B26A00C87CB2 /* LoginViewController.m */,
 				A5080905189ED32B009561FD /* VideoCell.h */,
 				A5080906189ED32B009561FD /* VideoCell.m */,
 				A591FABA1889C9800096EBE9 /* Images.xcassets */,
+				9F40A4F418BC32AA0061FC0E /* tree.jpeg */,
 				A591FAA91889C9800096EBE9 /* Supporting Files */,
 			);
 			path = flipr;
@@ -390,10 +396,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F40A4F518BC32AA0061FC0E /* tree.jpeg in Resources */,
 				21C97643189F051E0096620D /* FlickrCell.xib in Resources */,
 				A591FABB1889C9800096EBE9 /* Images.xcassets in Resources */,
 				A591FAAD1889C9800096EBE9 /* InfoPlist.strings in Resources */,
 				A591FAB61889C9800096EBE9 /* Main.storyboard in Resources */,
+				9F40A4F718BC46DB0061FC0E /* flipper.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

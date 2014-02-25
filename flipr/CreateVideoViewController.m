@@ -1,4 +1,4 @@
-//
+    //
 //  CreateVideoViewController.m
 //  flipr
 //
@@ -42,7 +42,7 @@
 
 - (IBAction)onDoneButton:(id)sender;
 - (void)getVideoUrl;
-
+- (CGImageRef)getCoverPhoto:(id)object;
 
 @end
 
@@ -361,6 +361,16 @@
     userVideo[@"duration"] = [dateFormatter stringFromDate:d];
     userVideo[@"S3uniqueKey"] = self.uniqueKey;
     
+    // Get the cover photo
+    CGImageRef cgRef = [self getCoverPhoto:(id)[self.selectedPhotos firstObject]];
+    UIImage *image = [UIImage imageWithCGImage:cgRef];
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.05f);
+    NSLog(@"imageData: %@", imageData);
+    
+    PFFile *coverPhoto = [PFFile fileWithData:imageData];
+    [userVideo setObject:coverPhoto forKey:@"coverPhoto"];
+    
     // Send to parse
     [userVideo saveInBackground];
 
@@ -381,4 +391,42 @@
     // Go to the video list
     [self performSegueWithIdentifier:@"createToVideoListSegue" sender:nil];
 }
+
+- (CGImageRef)getCoverPhoto:(id)object {
+    NSURL *urlStr;
+    NSString *photoText = @"";
+    CGImageRef imref = Nil;
+    
+    if([object isKindOfClass:[FlickrPhoto class]]) {
+        FlickrPhoto *myFp = object;
+        urlStr = [NSURL URLWithString:myFp.photoURL];
+        if(myFp.photoCaption){
+            photoText = myFp.photoCaption;
+        }
+        NSLog(@"The url for flickr photo is :%@ and the caption is : %@",urlStr,photoText);
+        //imref = [[UIImage imageWithData:[NSData dataWithContentsOfURL:urlStr]] CGImage];
+        NSData *nsData = [NSData dataWithContentsOfURL:urlStr];
+        //NSLog(@"nsData: %@", nsData);
+        
+        UIImage *image = [UIImage imageWithData: nsData];
+        imref = image.CGImage;
+        
+    } else if([object isKindOfClass:[CameraPhoto class]]) {
+        
+        ALAsset *myCameraPhoto = object;
+        urlStr = myCameraPhoto.defaultRepresentation.url;
+        CameraPhoto *myCp = object;
+        //urlStr = [NSURL URLWithString:myCameraPhoto.photoURL];
+        //urlStr = [NSURL URLWithString:@""];
+        if(myCp.photoCaption){
+            photoText= myCp.photoCaption;
+        }
+        NSLog(@"The url for camera photo is :%@ and the caption is :%@",urlStr,photoText);
+        ALAssetRepresentation *rep = [myCameraPhoto defaultRepresentation];
+        imref = [rep fullResolutionImage];
+    }
+    
+    return imref;
+}
+
 @end

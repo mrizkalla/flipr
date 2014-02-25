@@ -73,6 +73,15 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
     
     VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
+    // Load cover photo
+    cell.coverPhoto.image = [UIImage imageNamed:@"flipper.jpeg"]; // placeholder image
+    cell.coverPhoto.file = (PFFile *)[object objectForKey:@"coverPhoto"];
+    
+    [cell.coverPhoto loadInBackground];
+    //NSLog(@"coverPhoto loadInBackground, %@", cell.coverPhoto.file);
+    //PFFile *coverPhoto = object[@"coverPhoto"];
+    //cell.coverPhoto.image = [UIImage imageNamed:@"flipper.jpeg"];
+    //cell.coverPhoto.file = coverPhoto;
     
     // Configure the cell to show todo item with a priority at the bottom
     cell.titleLabel.text = [object objectForKey:@"title"];
