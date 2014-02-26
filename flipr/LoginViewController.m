@@ -46,7 +46,10 @@
     
     NSLog(@"View did appear");
     
-    if (![PFUser currentUser]) { // No user logged in
+    if ([PFUser currentUser]) {
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+    else {
         [self presentLogInScreen];
     }
 }
@@ -119,7 +122,20 @@
 
 // Sent to the delegate when a PFUser is signed up.
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
-    [self dismissViewControllerAnimated:YES completion:nil]; // Dismiss the PFSignUpViewController
+    //[self dismissViewControllerAnimated:YES completion:NULL]; // Dismiss the PFSignUpViewController
+    NSLog(@"Signing out...");
+    [PFUser logOut];
+    
+    if (![PFUser currentUser]) {
+        [[[UIAlertView alloc] initWithTitle:@"Sign up complete!"
+                                    message:@"You have successfully signed up!  Please log in again and enjoy flipr!"
+                                   delegate:nil
+                          cancelButtonTitle:@"ok"
+                          otherButtonTitles:nil] show];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 // Sent to the delegate when the sign up attempt fails.
@@ -133,14 +149,6 @@
 }
 
 #pragma mark - Private methods
-
-//- (void)onSignOutButton {
-//    NSLog(@"Signing out...");
-//    [PFUser logOut];
-//    // This does not work somehow
-//    // [self.navigationController popViewControllerAnimated:YES];
-//    [self presentLogInScreen];
-//}
 
 - (void)presentLogInScreen {
     // Create the log in view controller
